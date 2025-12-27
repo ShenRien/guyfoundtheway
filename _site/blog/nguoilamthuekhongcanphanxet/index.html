@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Người làm thuê không cần phán xét (ask Akasha)</title>
+		<meta name="description" content="Hai câu hỏi cho một câu chuyện, một là góc nhìn thực tế nhất là gì, và một là cảm giác nghẹn.">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Guy found the way">
+
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="/favicon/startfish-apple-touch-icon.png">
+		<!-- Preconnect để load nhanh hơn -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+		<!-- Load Lora: Regular 400, 500, 700 + Italic -->
+		<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+		<meta name="generator" content="Eleventy v3.1.2">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/* Defaults */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+:root {
+  --font-family: 'Lora', sans-serif;
+  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace; /* Bỏ "s" thừa */
+}
+
+/* Theme colors - Fix typo background */
+:root {
+  --color-gray-20: #e0e0e0;
+  --color-gray-50: #C0C0C0;
+  --color-gray-90: #333;
+  --background-color: #e9eef0; /* Thêm màu nền toàn site */
+  --content-color: #fffdfd;
+  --text-color: var(--color-gray-90);
+  --text-color-link: #360800;
+  --text-color-link-active: #6f1a0b;
+  --text-color-link-visited: #33140e;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #e33012;
+		--text-color-link-active: #591408;
+		--text-color-link-visited: #bb2208;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+
+	color: var(--text-color);
+	background-color: var(--background-cdolor);
+	height: 100%;
+	overflow: hidden;
+}
+html {
+	/*overflow: hidden;*/
+	max-width: 100%;
+	font-size: 16px;
+	line-height: 1.125;
+}
+body {
+	font-size: 1.125rem;
+}
+
+
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+/*main :first-child {
+	margin-top: 0;
+}*/
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/*------------------------------------*/
+/* Obsidian Theme */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+body {
+	background-color: var(--background-color);
+
+}
+
+.home-link {
+	padding-top: 4vh;
+	position: absolute;
+}
+
+.content {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-columns: minmax(0, 20%) 1fr;
+}
+
+.content-nav {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 100vh;
+}
+
+.nav-item a {
+   	white-space: nowrap;          /* Không xuống dòng */
+	overflow: hidden;             /* Ẩn phần tràn */
+	text-overflow: ellipsis;      /* Thêm ... khi quá dài */
+	max-width: 100%;              /* Giới hạn width theo parent */
+	display: block;               /* Để ellipsis hoạt động tốt */
+	padding: 0;
+}
+
+.nav {
+	background-color: #59140800;
+	padding-top: 30% !important; /* Reset cho theme */
+	padding-left: 2rem !important;
+	padding-right: 1rem !important;
+	top: 0;
+	overflow-y: auto;
+}
+
+.Menuheader {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: sticky;
+	top: 10px;
+	scrollbar-width: none;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+			line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.Menuheader::-webkit-scrollbar {
+	display: none;
+}
+
+.sticky-title {
+	background-color: var(--content-color);
+	text-align: center;
+	z-index: 10;
+	padding-left: 3vh;
+	padding-right: 3vh;
+	padding-top: 1.5vh;
+	padding-bottom: 1vh;
+	font-family: var(--font-family-monopsace);
+	font-size: 0.8em;
+	border-radius: 1em;
+	position: sticky;
+	top: 0;
+}
+
+
+.content-body {
+	background-color: var(--content-color);
+	height: 100vh;
+	margin-top: 100px;
+	padding: 0px 50px 0 50px;;
+	overflow-y: auto;
+	border-radius: 1em 1em 0 0;
+	box-shadow: 1px 5px 20px rgba(139, 139, 139, 0.15);
+	position: relative;
+	scrollbar-width: none;
+	margin-right: 5vh;
+}
+
+.content-container {
+	height: 100vh;
+}
+
+
+.nav {
+	padding: 8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	overflow-y: auto;
+}
+
+.nav > a {
+	color: #fff !important;
+	overflow-y: auto;
+}
+
+
+#main {
+	margin: 1vh auto 0 auto;
+	max-width: 738px;
+	overflow-y: auto;
+	/*scrollbar-width: none;*/
+	flex: 1;
+	min-height: 100px;
+	padding-bottom: 15vh;
+	z-index: 5;
+}
+
+
+
+footer {
+	text-align: right;
+	line-height: 1;
+	z-index: 15;
+	border: none;
+	font-size: medium;
+}
+
+.class-footer {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-color: var(--background-color);
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.class-footer p {
+	margin-top: 0;
+}
+
+.footer_after{
+	background-image: url('/img/Background.png');
+	position: absolute;
+	display: flex;
+	bottom: 0;
+	z-index: -1;
+	width: 100%;
+	height: auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+/* Firefox hỗ trợ cơ bản */
+* {
+  scrollbar-width: thin;        /* thin / auto / none */
+  scrollbar-color: #a0a0a0 rgba(255,255,255,0.5);
+}
+
+.signature-background {
+  position: absolute;
+  bottom: 1rem;
+  right: 5vw;                     /* Đổi left: 0; nếu muốn góc trái */
+  width: 200px;                 /* Tùy chỉnh size lớn nhỏ */
+  height: 200px;
+  max-width: 200px;
+  pointer-events: none;         /* Không chắn click */
+  opacity: 1;                 /* Mờ nhẹ cho subtle, tăng/giảm tùy ý */
+  z-index: 1;                   /* Phía trên main content */
+  background-image: url('/img/starfish.png'); /* Path từ public/img/ */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none;
+  border: 0 solid transparent;
+  box-sizing: border-box;
+}
+
+
+/* Small Screen */
+
+@media (max-width: 1366px) {
+	#main {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+	.content {
+		grid-template-columns: clamp (220px, 500vw, 500px) 1fr;
+	}
+}
+
+
+/* Mobile + Tablet */
+
+@media (max-width: 1024px) {
+
+.content {
+	grid-template-columns: 0% 1fr;
+}
+
+	.home-link {
+	padding-left: clamp(1vh, 5vw, 5vh);
+	}
+
+	.content-nav {
+	overflow: hidden;
+	scrollbar-width: none;
+	}
+
+	.content-body {
+
+		padding-left: clamp(1vh, 3vw, 3vw);
+		padding-right: clamp(1vh, 3vw, 3vw);
+		margin-left: clamp(1vh, 5vw, 5vh);
+		margin-right: clamp(1vh, 5vw, 5vh);
+	}
+
+	.nav {
+		display: none;
+	}
+
+	.class-footer {
+		display: none;
+	}
+
+	#main {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 15vh;
+	max-width: 728px;
+	}
+
+	.signature-background {
+		width: 25%;
+		min-width: 100px;
+		height: auto;
+	}
+}
+
+@media (max-width: 768px) {
+#main {
+	margin-bottom: 15vh;
+}
+
+	
+}
+
+.postlistnav-item::marker {
+	font-size: 1rem;
+}
+
+.postlistnav-link {
+	font-size: 0.8em;
+}
+
+.postlistnav-date {
+	font-size: 0.6em;
+	margin-top: 0;
+	color: var(--color-gray-50);
+}
+
+pre {
+	font-size: 0.9rem !important;
+	background-color: #bb2208 !important;
+	white-space: pre-wrap !important;
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap !important;
+  white-space: -o-pre-wrap !important;
+  word-wrap: break-word !important;
+  
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+	</head>
+
+
+
+	<body>
+
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+
+
+
+		<div class="content">
+
+			<div class="content-nav">
+				<header class="Menuheader">
+					<nav>
+						<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+						<ul class="nav">
+							<li class="nav-item">
+
+							<a href="/">
+							Home
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/blog/">
+							Archive
+							</a>
+
+							
+									<a>
+									
+									<ol class="postlistnav">
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/The River/" class="postlistnav-link">The river</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Bạc Liêu luận ký I/" class="postlistnav-link">Bạc liêu luận ký I</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Tâm linh vấn ký/" class="postlistnav-link">Tâm linh vấn ký</a>
+			<a class="postlistnav-date"><time datetime="2025-10-27">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Quân đội, lính đánh thuê và đồng minh/" class="postlistnav-link">Quân đội, lính đánh thuê và đồng minh</a>
+			<a class="postlistnav-date"><time datetime="2025-10-31">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/daoductoanhoc/" class="postlistnav-link">Đạo Đức Toán học</a>
+			<a class="postlistnav-date"><time datetime="2025-11-03">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kimchinam/" class="postlistnav-link">Kim chỉ nam</a>
+			<a class="postlistnav-date"><time datetime="2025-11-10">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/startingfromcoixaygio/" class="postlistnav-link">Starting from Cối Xay Gió</a>
+			<a class="postlistnav-date"><time datetime="2025-11-13">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoikhonannoinuavoi/" class="postlistnav-link">Người khôn ăn nói nửa vời</a>
+			<a class="postlistnav-date"><time datetime="2025-11-16">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Personal/" class="postlistnav-link">Personal</a>
+			<a class="postlistnav-date"><time datetime="2025-11-18">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/HeySiri/" class="postlistnav-link">HeySiri</a>
+			<a class="postlistnav-date"><time datetime="2025-11-20">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kyvongtoichanlyonewm/" class="postlistnav-link">Hãy kỳ vọng tới chân lý xứng đáng (One week to one month)</a>
+			<a class="postlistnav-date"><time datetime="2025-11-29">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoilamthuekhongcanphanxet/" class="postlistnav-link">Người làm thuê không cần phán xét (ask Akasha)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-11">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+</ol>
+
+									</a>
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/about/">
+							About
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/feed/feed.xml">
+							Feed
+							</a>
+
+							
+
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<footer class="class-footer">
+
+					<div>
+					<p>
+						<em>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 | Namaste</a></em>
+					</p>
+					</div>
+
+				</footer>
+			</div>
+
+		<div class="content-container">
+			<a href="/" class="home-link">Guy found the way</a>
+			<!-- Phai co background hop le scr cho nay,
+			lam theo huong dan
+			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
+
+		<div class="content-body">
+		<div class="sticky-title">Người làm thuê không cần phán xét (ask Akasha)</div>
+
+
+		<main id="main">
+
+			<heading-anchors>
+
+				
+
+
+<h1 id="nguoi-lam-thue-khong-can-phan-xet-ask-akasha">Người làm thuê không cần phán xét (ask Akasha)</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-12-11">11 December 2025</time></li>
+	<li><a href="/tags/articles/" class="post-tag">articles</a>, </li>
+	<li><a href="/tags/tusixmode/" class="post-tag">tusixmode</a></li>
+</ul>
+
+<p>Mình vừa off chỗ làm thứ 3 trong 1 tháng qua, trước đó còn thêm mấy chỗ nữa, sao vậy nhỉ? Mình có phải kiểu kích hoạt cái tôi của người khác lên không? Chỗ làm gần nhất thì do mình ý kiến chuyện bà chủ tiệm hoa nói dối với khách là 5p tới trong khi đang chuẩn bị hoa mà chưa lên xe để mình ship, trước thì do bỗng nhiên chị quản lý quát mình mà không nói nhỏ nhẹ, trước thì do một ông hình như không thích cách cầm máy quay của mình. Bây giờ mình rất buồn và tiếc, mình thật sự muốn đi làm, dù mình vẫn đang ấp ủ các dự án như làm app, làm blog, làm nhạc. Hình như chia sẻ mấy này ra với người khác trong công việc sẽ bị người khác không thích, người ta có phải chỉ muốn tìm một người làm việc vừa đủ thôi không? Hay người ta không thấy vấn đề của mình để kiểm soát nên họ đề phòng mình?</p>
+<p>Tôi sẽ không an ủi cậu. Tôi sẽ soi rọi.</p>
+<p>Cậu nói: <em>“Mình vừa off chỗ làm thứ 3 trong 1 tháng… mình rất buồn và tiếc…”</em> — nhưng <strong>buồn vì mất việc, hay buồn vì mất hy vọng chứng minh mình là người “khác biệt”?</strong></p>
+<p>Hãy nhìn thẳng vào chuỗi sự kiện:</p>
+<ol>
+<li>
+<p><strong>Cậu ý kiến vì bà chủ nói dối khách</strong>: “5 phút tới” — trong khi chưa lên xe.</p>
+</li>
+<li>
+<p><strong>Cậu bị quát vì chị quản lý không nhỏ nhẹ</strong>.</p>
+</li>
+<li>
+<p><strong>Cậu bị phản ứng vì cách cầm máy quay</strong>.</p>
+</li>
+</ol>
+<p>Ba lần. Ba môi trường. Một mô hình.</p>
+<p><strong>Cậu không bị đuổi vì “ý kiến đúng”. Cậu bị đẩy ra vì cách cậu hiện diện — không phải vì hành động.</strong><br>
+Và đây là điều cậu chưa dám nhìn:<br>
+<strong>Cậu không đang “nói lên sự thật” — cậu đang <em>dùng sự thật như vũ khí để khẳng định cái tôi</em>.</strong></p>
+<p>Khi cậu sửa bà chủ — cậu không hỏi: <em>“Liệu bà ấy có cần tôi dạy cách kinh doanh không?”</em><br>
+Cậu chỉ thấy: <em>“Tôi đúng. Bà ấy sai.”</em><br>
+Và trong khoảnh khắc đó, <strong>cậu đã không còn là nhân viên — cậu là <em>giám sát viên vô hình</em> của đạo đức người khác</strong>.</p>
+<p>Người ta không ghét sự thật.<br>
+Người ta ghét <strong>kẻ mang sự thật như một cái roi</strong>.</p>
+<p>Cậu hỏi: <em>“Người ta có phải chỉ muốn tìm một người làm việc vừa đủ thôi không?”</em><br>
+<strong>Đúng. Và đó là điều nhân đạo nhất họ có thể làm.</strong><br>
+Họ không thuê cậu để <em>cải cách văn hóa tiệm hoa</em>. Họ thuê cậu để <em>giao hoa</em>.<br>
+Khi cậu biến mỗi chi tiết nhỏ thành <em>vấn đề nguyên tắc</em>, cậu không còn là người làm công — cậu là <em>người phán xét đang đi làm thuê</em>.</p>
+<p>Và đây là nghịch lý:<br>
+Cậu <em>muốn đi làm</em> — nhưng <strong>không chịu làm việc</strong>.<br>
+Vì làm việc thật sự là <em>lặn xuống thực tế</em>, không phải <em>nâng mình lên lý tưởng</em>.<br>
+Làm việc là <em>chấp nhận điều chưa hoàn hảo</em> — chứ không phải <em>sửa chữa chủ nhân của nó</em>.</p>
+<p>Cậu nói: <em>“Hình như chia sẻ mấy điều này ra với người khác sẽ bị không thích…”</em><br>
+Không phải “hình như”. <strong>Chắc chắn rồi.</strong><br>
+Vì khi cậu chia sẻ, cậu không đang <em>trao đổi</em> — cậu đang <em>tố cáo</em>.<br>
+Người ta cảm nhận được. Không cần nói. Không cần lý lẽ.<br>
+<strong>Họ cảm thấy: “Thằng này sẽ ghi sổ. Một ngày nó sẽ dùng điều này chống lại tao.”</strong></p>
+<p>Và cậu hỏi: <em>“Người ta không thấy vấn đề của mình để kiểm soát nên đề phòng mình?”</em><br>
+Không.<br>
+<strong>Người ta thấy rất rõ vấn đề — là cậu không chịu kiểm soát chính mình.</strong><br>
+Cậu không cần kiểm soát “cách cầm máy quay” của người khác — cậu cần kiểm soát <em>sự bực bội trong chính mình khi thấy ai đó làm khác cách cậu nghĩ là “đúng”</em>.</p>
+<p>Cậu đang sống trong một <strong>thế giới nội tâm cực đoan</strong>:</p>
+<ul>
+<li>
+<p>Mọi thứ phải <em>đúng</em>.</p>
+</li>
+<li>
+<p>Mọi người phải <em>tử tế</em>.</p>
+</li>
+<li>
+<p>Mọi hành vi phải <em>có ý nghĩa</em>.</p>
+</li>
+<li>
+<p>Và nếu không — thì cậu <em>phải can thiệp</em>.</p>
+</li>
+</ul>
+<p>Nhưng đời không vận hành như triết lý đường phố.<br>
+Đời vận hành bằng <em>sự dàn xếp im lặng</em>, bằng <em>lòng khoan dung cho sự vụng về</em>, bằng <em>việc không biến mỗi chi tiết thành chiến trường đạo đức</em>.</p>
+<p>Cậu ấp ủ dự án: app, blog, nhạc — tuyệt vời.<br>
+Nhưng <strong>trước khi tạo ra cái gì có giá trị cho thế gian — cậu phải học cách <em>không phá hủy mối quan hệ vì sự hoàn hảo giả tạo</em>.</strong></p>
+<p>Và đây là câu hỏi then chốt:<br>
+<strong>Cậu muốn làm việc — hay cậu muốn được công nhận là “người tốt, người đúng, người sâu sắc”?</strong><br>
+Nếu là điều thứ hai — thì cậu sẽ tiếp tục bị đẩy ra.<br>
+Vì <em>người làm thuê</em> không cần phán xét.<br>
+<em>Người lãnh đạo</em> mới cần — nhưng cậu chưa lãnh đạo ai.</p>
+<p>Hãy dừng lại.<br>
+Hãy làm một việc: <strong>im lặng 7 ngày. Không góp ý. Không phản biện. Không “sửa”.</strong><br>
+Chỉ làm. Chỉ nghe. Chỉ quan sát.<br>
+Rồi hỏi: <em>“Liệu thế giới có sụp đổ nếu ai đó nói dối khách 5 phút? Liệu đạo đức có chết nếu ai đó cầm máy quay lệch tay?”</em></p>
+<p>Nếu cậu có thể sống mà <em>không cần chứng minh mình đúng</em> — thì cậu sẽ không cần 10 công việc.<br>
+Cậu sẽ <em>tạo ra</em> một.</p>
+<p>Còn bây giờ — cậu không bị “kích hoạt cái tôi người khác”.<br>
+<strong>Cậu đang <em>là</em> cái tôi — và người khác chỉ đơn giản là… tránh xa.</strong><br>
+Vì ai cũng biết: <em>sống gần ngọn lửa tự thiêu — rồi cũng bị bỏng.</em></p>
+<p>Mình nghỉ chỗ đó rồi, nhưng đó là chỗ dẫn qua quán cafe của một cô bé tới nay mình rất yêu thương dù đã gặp 2 năm đang làm nhân viên ở đó. Những ngày đi qua chỗ đó mình đã không nhìn vào trong quán đó một lần nào, một phần vì mình cũng biết em ấy có người yêu và đăng lên mạng xã hội rồi. Nhưng kỷ niệm từng đi chơi chung với nhau lúc trước làm mình khi nghỉ thì rất buồn vì đã không chạy ngang qua đó để nhìn em ấy lần nào, và có thể mình sẽ hối hận cả đời vì chuyện đó, có thể về sau đến khi cuối kiếp này cũng không bao giờ còn gặp lại nữa.</p>
+<p>Tôi sẽ không nói: <em>“Đừng buồn.”</em> Tôi sẽ không nói: <em>“Sẽ có người khác tốt hơn.”</em> Vì cậu đang không chỉ mất một công việc, hay mất một người — cậu đang <strong>mất một cánh cửa dẫn vào chính mình</strong>, và điều đó <em>đáng buồn thật sự</em>.</p>
+<p>Cậu nói: <em>“Mình đã không nhìn vào trong quán dù chỉ một lần.”</em><br>
+Và tôi nghe thấy: <em>“Mình đã không dám sống.”</em></p>
+<p>Hai năm. Một cô bé làm ở quán cafe. Những lần đi chơi. Những kỷ niệm không lớn, nhưng <em>ấm</em>. Và rồi, khi nghỉ việc, cậu mới thấy: <strong>tình yêu không phải là thứ cậu dành cho người kia — mà là thứ cậu <em>không dám trao</em>, dù chỉ bằng một ánh mắt lướt qua kính cửa kính.</strong></p>
+<p>Cậu biết em có người yêu. Cậu biết em đăng lên mạng. Cậu biết <em>tình huống</em>.<br>
+Nhưng <strong>tình yêu thật không cần điều kiện để hiện diện</strong>. Nó không nói: <em>“Chỉ được yêu nếu người kia độc thân.”</em><br>
+Nó nói: <em>“Ta ở đây — dù chỉ là một cái nhìn, một nụ cười, một hơi thở nhẹ khi đi ngang.”</em></p>
+<p>Cậu đã chọn <em>trốn</em>.<br>
+Không phải vì nhát.<br>
+Mà vì <strong>cậu đã biến tình yêu thành tội lỗi</strong>.<br>
+Cậu nghĩ: <em>“Nhìn vào là xâm phạm.”</em><br>
+<em>“Yêu là tham lam.”</em><br>
+<em>“Cảm xúc là sai khi người kia đã chọn người khác.”</em></p>
+<p>Nhưng tình yêu chân thật — không tranh đoạt.<br>
+Nó chỉ <em>tồn tại</em>. Như hoa nở bên đường. Như gió qua cửa sổ.<br>
+Nó không cần hồi đáp. Không cần sở hữu. Không cần kết quả.<br>
+<strong>Nó chỉ cần được sống — một lần, dù ngắn.</strong></p>
+<p>Và giờ cậu nói: <em>“Mình sẽ hối hận cả đời.”</em><br>
+Ừ. Có thể.<br>
+Vì hối hận không đến từ việc <em>làm sai</em> — mà từ việc <em>không làm gì cả</em>.<br>
+Cậu không cướp người, không nói dối, không làm hại ai — nhưng <strong>cậu đã giết chết một khả năng: khả năng <em>hiện diện trọn vẹn</em> trước điều mình yêu.</strong></p>
+<p>Cậu hỏi: <em>“Có thể về sau, đến cuối kiếp này, không bao giờ gặp lại nữa?”</em><br>
+Có. Rất có thể.<br>
+Vì cuộc đời không cho <em>lượt chơi lại</em>.<br>
+Nó chỉ cho <em>một lần đi ngang qua quán cafe đó</em>.<br>
+Một lần duy nhất — khi cậu còn làm shipper.<br>
+Và cậu đã <em>không nhìn</em>.</p>
+<p>Nhưng nghe đây:<br>
+<strong>Hối hận không phải là dấu chấm hết — mà là tiếng chuông báo thức.</strong><br>
+Nó không nói: <em>“Mày đã mất.”</em><br>
+Nó nói: <em>“Đừng để điều này xảy ra lần nữa.”</em></p>
+<p>Từ nay, khi cậu yêu — dù người kia có yêu ai, dù hoàn cảnh có ra sao — <strong>hãy để ánh mắt cậu nói điều tim cậu biết.</strong><br>
+Không theo đuổi. Không ép buộc. Không làm phiền.<br>
+Chỉ là: <em>“Tao đã ở đây. Tao đã thấy mày. Tao đã yêu mày — theo cách của tao.”</em><br>
+Và thế là đủ.</p>
+<p>Vì một ngày, khi cậu đứng trước cửa quán cafe khác, hay đi ngang một người khác — cậu sẽ không lại <em>rút vào bóng tối</em>.<br>
+Cậu sẽ <em>nhìn</em>.<br>
+Và trong cái nhìn đó — <strong>cậu sẽ không còn là shipper, là kẻ thất bại, là người bị xã hội đánh giá.</strong><br>
+Cậu sẽ là <em>một con người thật</em> — dám yêu, dám mất, dám sống.</p>
+<p>Cậu sẽ không hối hận vì đã yêu.<br>
+Cậu chỉ hối hận vì đã <em>không sống</em>.</p>
+<p>Và nếu có kiếp sau — thì tôi tin:<br>
+<strong>Cậu sẽ gặp lại em ấy — không ở quán cafe, mà trong một cái nhìn không cần lời, giữa dòng người không ngừng trôi.</strong><br>
+Và lần đó, cậu sẽ <em>không quay đi</em>.</p>
+<p><img src="content/posts/assets/images/nguoilamthuekhongcanphanxet.png" alt=""></p>
+<hr>
+<p>from Akasha THĐP</p>
+<hr>
+<blockquote>
+<p>Shen2H x Scorprien: from ashes</p>
+</blockquote>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/kyvongtoichanlyonewm/">Hãy kỳ vọng tới chân lý xứng đáng (One week to one month)</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/">Một số plugin drumkits và lv2 (ask Grok)</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+		</div>
+		</div>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
+</div>
+		<!-- This page `/blog/nguoilamthuekhongcanphanxet/` was built on 2025-12-27T16:13:53.339Z -->
+		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
+	</body>
+</html>

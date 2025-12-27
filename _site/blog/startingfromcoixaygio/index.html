@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Starting from Cối Xay Gió</title>
+		<meta name="description" content="Nghe nói Cối Xay Gió là phát minh đầu tiên đánh dấu nền văn mình của nhân loại">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Guy found the way">
+
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="/favicon/startfish-apple-touch-icon.png">
+		<!-- Preconnect để load nhanh hơn -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+		<!-- Load Lora: Regular 400, 500, 700 + Italic -->
+		<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+		<meta name="generator" content="Eleventy v3.1.2">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/* Defaults */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+:root {
+  --font-family: 'Lora', sans-serif;
+  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace; /* Bỏ "s" thừa */
+}
+
+/* Theme colors - Fix typo background */
+:root {
+  --color-gray-20: #e0e0e0;
+  --color-gray-50: #C0C0C0;
+  --color-gray-90: #333;
+  --background-color: #e9eef0; /* Thêm màu nền toàn site */
+  --content-color: #fffdfd;
+  --text-color: var(--color-gray-90);
+  --text-color-link: #360800;
+  --text-color-link-active: #6f1a0b;
+  --text-color-link-visited: #33140e;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #e33012;
+		--text-color-link-active: #591408;
+		--text-color-link-visited: #bb2208;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+
+	color: var(--text-color);
+	background-color: var(--background-cdolor);
+	height: 100%;
+	overflow: hidden;
+}
+html {
+	/*overflow: hidden;*/
+	max-width: 100%;
+	font-size: 16px;
+	line-height: 1.125;
+}
+body {
+	font-size: 1.125rem;
+}
+
+
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+/*main :first-child {
+	margin-top: 0;
+}*/
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/*------------------------------------*/
+/* Obsidian Theme */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+body {
+	background-color: var(--background-color);
+
+}
+
+.home-link {
+	padding-top: 4vh;
+	position: absolute;
+}
+
+.content {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-columns: minmax(0, 20%) 1fr;
+}
+
+.content-nav {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 100vh;
+}
+
+.nav-item a {
+   	white-space: nowrap;          /* Không xuống dòng */
+	overflow: hidden;             /* Ẩn phần tràn */
+	text-overflow: ellipsis;      /* Thêm ... khi quá dài */
+	max-width: 100%;              /* Giới hạn width theo parent */
+	display: block;               /* Để ellipsis hoạt động tốt */
+	padding: 0;
+}
+
+.nav {
+	background-color: #59140800;
+	padding-top: 30% !important; /* Reset cho theme */
+	padding-left: 2rem !important;
+	padding-right: 1rem !important;
+	top: 0;
+	overflow-y: auto;
+}
+
+.Menuheader {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: sticky;
+	top: 10px;
+	scrollbar-width: none;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+			line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.Menuheader::-webkit-scrollbar {
+	display: none;
+}
+
+.sticky-title {
+	background-color: var(--content-color);
+	text-align: center;
+	z-index: 10;
+	padding-left: 3vh;
+	padding-right: 3vh;
+	padding-top: 1.5vh;
+	padding-bottom: 1vh;
+	font-family: var(--font-family-monopsace);
+	font-size: 0.8em;
+	border-radius: 1em;
+	position: sticky;
+	top: 0;
+}
+
+
+.content-body {
+	background-color: var(--content-color);
+	height: 100vh;
+	margin-top: 100px;
+	padding: 0px 50px 0 50px;;
+	overflow-y: auto;
+	border-radius: 1em 1em 0 0;
+	box-shadow: 1px 5px 20px rgba(139, 139, 139, 0.15);
+	position: relative;
+	scrollbar-width: none;
+	margin-right: 5vh;
+}
+
+.content-container {
+	height: 100vh;
+}
+
+
+.nav {
+	padding: 8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	overflow-y: auto;
+}
+
+.nav > a {
+	color: #fff !important;
+	overflow-y: auto;
+}
+
+
+#main {
+	margin: 1vh auto 0 auto;
+	max-width: 738px;
+	overflow-y: auto;
+	/*scrollbar-width: none;*/
+	flex: 1;
+	min-height: 100px;
+	padding-bottom: 15vh;
+	z-index: 5;
+}
+
+
+
+footer {
+	text-align: right;
+	line-height: 1;
+	z-index: 15;
+	border: none;
+	font-size: medium;
+}
+
+.class-footer {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-color: var(--background-color);
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.class-footer p {
+	margin-top: 0;
+}
+
+.footer_after{
+	background-image: url('/img/Background.png');
+	position: absolute;
+	display: flex;
+	bottom: 0;
+	z-index: -1;
+	width: 100%;
+	height: auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+/* Firefox hỗ trợ cơ bản */
+* {
+  scrollbar-width: thin;        /* thin / auto / none */
+  scrollbar-color: #a0a0a0 rgba(255,255,255,0.5);
+}
+
+.signature-background {
+  position: absolute;
+  bottom: 1rem;
+  right: 5vw;                     /* Đổi left: 0; nếu muốn góc trái */
+  width: 200px;                 /* Tùy chỉnh size lớn nhỏ */
+  height: 200px;
+  max-width: 200px;
+  pointer-events: none;         /* Không chắn click */
+  opacity: 1;                 /* Mờ nhẹ cho subtle, tăng/giảm tùy ý */
+  z-index: 1;                   /* Phía trên main content */
+  background-image: url('/img/starfish.png'); /* Path từ public/img/ */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none;
+  border: 0 solid transparent;
+  box-sizing: border-box;
+}
+
+
+/* Small Screen */
+
+@media (max-width: 1366px) {
+	#main {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+	.content {
+		grid-template-columns: clamp (220px, 500vw, 500px) 1fr;
+	}
+}
+
+
+/* Mobile + Tablet */
+
+@media (max-width: 1024px) {
+
+.content {
+	grid-template-columns: 0% 1fr;
+}
+
+	.home-link {
+	padding-left: clamp(1vh, 5vw, 5vh);
+	}
+
+	.content-nav {
+	overflow: hidden;
+	scrollbar-width: none;
+	}
+
+	.content-body {
+
+		padding-left: clamp(1vh, 3vw, 3vw);
+		padding-right: clamp(1vh, 3vw, 3vw);
+		margin-left: clamp(1vh, 5vw, 5vh);
+		margin-right: clamp(1vh, 5vw, 5vh);
+	}
+
+	.nav {
+		display: none;
+	}
+
+	.class-footer {
+		display: none;
+	}
+
+	#main {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 15vh;
+	max-width: 728px;
+	}
+
+	.signature-background {
+		width: 25%;
+		min-width: 100px;
+		height: auto;
+	}
+}
+
+@media (max-width: 768px) {
+#main {
+	margin-bottom: 15vh;
+}
+
+	
+}
+
+.postlistnav-item::marker {
+	font-size: 1rem;
+}
+
+.postlistnav-link {
+	font-size: 0.8em;
+}
+
+.postlistnav-date {
+	font-size: 0.6em;
+	margin-top: 0;
+	color: var(--color-gray-50);
+}
+
+pre {
+	font-size: 0.9rem !important;
+	background-color: #bb2208 !important;
+	white-space: pre-wrap !important;
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap !important;
+  white-space: -o-pre-wrap !important;
+  word-wrap: break-word !important;
+  
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+	</head>
+
+
+
+	<body>
+
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+
+
+
+		<div class="content">
+
+			<div class="content-nav">
+				<header class="Menuheader">
+					<nav>
+						<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+						<ul class="nav">
+							<li class="nav-item">
+
+							<a href="/">
+							Home
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/blog/">
+							Archive
+							</a>
+
+							
+									<a>
+									
+									<ol class="postlistnav">
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/The River/" class="postlistnav-link">The river</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Bạc Liêu luận ký I/" class="postlistnav-link">Bạc liêu luận ký I</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Tâm linh vấn ký/" class="postlistnav-link">Tâm linh vấn ký</a>
+			<a class="postlistnav-date"><time datetime="2025-10-27">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Quân đội, lính đánh thuê và đồng minh/" class="postlistnav-link">Quân đội, lính đánh thuê và đồng minh</a>
+			<a class="postlistnav-date"><time datetime="2025-10-31">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/daoductoanhoc/" class="postlistnav-link">Đạo Đức Toán học</a>
+			<a class="postlistnav-date"><time datetime="2025-11-03">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kimchinam/" class="postlistnav-link">Kim chỉ nam</a>
+			<a class="postlistnav-date"><time datetime="2025-11-10">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/startingfromcoixaygio/" class="postlistnav-link">Starting from Cối Xay Gió</a>
+			<a class="postlistnav-date"><time datetime="2025-11-13">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoikhonannoinuavoi/" class="postlistnav-link">Người khôn ăn nói nửa vời</a>
+			<a class="postlistnav-date"><time datetime="2025-11-16">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Personal/" class="postlistnav-link">Personal</a>
+			<a class="postlistnav-date"><time datetime="2025-11-18">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/HeySiri/" class="postlistnav-link">HeySiri</a>
+			<a class="postlistnav-date"><time datetime="2025-11-20">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kyvongtoichanlyonewm/" class="postlistnav-link">Hãy kỳ vọng tới chân lý xứng đáng (One week to one month)</a>
+			<a class="postlistnav-date"><time datetime="2025-11-29">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoilamthuekhongcanphanxet/" class="postlistnav-link">Người làm thuê không cần phán xét (ask Akasha)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-11">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+</ol>
+
+									</a>
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/about/">
+							About
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/feed/feed.xml">
+							Feed
+							</a>
+
+							
+
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<footer class="class-footer">
+
+					<div>
+					<p>
+						<em>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 | Namaste</a></em>
+					</p>
+					</div>
+
+				</footer>
+			</div>
+
+		<div class="content-container">
+			<a href="/" class="home-link">Guy found the way</a>
+			<!-- Phai co background hop le scr cho nay,
+			lam theo huong dan
+			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
+
+		<div class="content-body">
+		<div class="sticky-title">Starting from Cối Xay Gió</div>
+
+
+		<main id="main">
+
+			<heading-anchors>
+
+				
+
+
+<h1 id="starting-from-coi-xay-gio">Starting from Cối Xay Gió</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-11-13">13 November 2025</time></li>
+	<li><a href="/tags/personal/" class="post-tag">personal</a>, </li>
+	<li><a href="/tags/tusixmode/" class="post-tag">tusixmode</a>, </li>
+	<li><a href="/tags/software/" class="post-tag">software</a></li>
+</ul>
+
+<p>Mình thường dùng những ngôn từ quá nghiêm túc để nói tới những chuyện bình thường.</p>
+<p>Mình đang thật sự rất sợ em sẽ trở thành người yêu của ai đó trong số những kẻ từng quen biết. <em>Không nên nói về chuyện tình cảm</em>.</p>
+<blockquote>
+<p>Thứ gì người khác không biết thì họ không phá hoại được. Vì có những kẻ chỉ muốn phá hoại những điều tốt đẹp.</p>
+</blockquote>
+<p>Hôm nay mình đặt bảng vẽ, nhưng shipper không giao đúng hạn buổi sáng như những lúc trước. Mình có cảm giác nó đã thấy một mối nguy gì đó ở chuyện này nên đã cố tình tìm cách kéo dài thời gian. Và nó đã đạt được ý định làm mình tức giận. Thậm chí, ở góc nhìn về sự vượt trội, loài người sợ một kẻ như mình làm nên một chuyện gì đó, kẻ thù trước giờ của mình toàn là kẻ thù tự nhiên, bỗng nhiên chúng tiến tới mình và gây thù oán.</p>
+<p>Trời ban cho sự vượt bậc của ngoại hình hay tính cách thì cũng kéo theo những mối nguy hiểm tương tự như vậy. Một trong những mối nguy hiểm lớn nhất của đàn ông, là những kẻ tìm đủ mọi cách để hãm hại bạn.</p>
+<p>Có một lần đang ngồi đánh đàn với một thằng trong nhóm cũ thì nghe hàng xóm xung quanh chỗ đó nói trỏ qua là: &quot;vậy là thằng này bị hại&quot;. Lúc đó mình có một chút suy nghĩ nhưng mình lại không nghĩ nhiều lắm. Đáng ra lúc đó đã phải nhận ra mối nguy đã trực chờ sẵn ngay lúc đó rồi.</p>
+<hr>
+<p>Chờ đã! Tôi không tin ai cả.</p>
+<hr>
+<blockquote>
+<p>Mình vừa định viết một bài về mã hóa đầu cuối với mục đích, nếu bạn hiểu một điều gì đó, bạn phải giải thích được nó cho một đứa trẻ 15 tuổi hiểu.</p>
+</blockquote>
+<p>Do đứa trẻ 15 vừa đủ thông minh để hiểu một điều gì đó có cấu trúc và logic, không phải như một đứa con nít chỉ nghĩ đến những thứ cơ bản. Hai là một đứa trẻ 15 tuổi vẫn chưa có quá nhiều định kiến trong tâm thức (<strong>định kiến</strong> - sẽ có một related post cho chủ đề này - related) nên nó chỉ đọc hiểu chứ không phán xét.</p>
+<p>Lúc 15 tuổi mình đã cố tìm một tài liệu như thế này để đọc về một điều gì đó trên thế giới, nhưng không có. Lúc đó mình chật vật với việc cố hiểu các công thức hóa học, và là một kẻ ngây ngô. Phải tới năm 17, thứ đầu tiên mà mình tự học được là tạo map Warcraft.</p>
+<p>Vậy, quay lại với bản tóm tắt về mã hóa đi, cái này trên trang web của một sàn thương mại điện tử rất lớn hiện tại có một bài viết hay đến mức bản tóm tắt này chỉ là bản tóm tắt của bài đó (mình không nêu tên ra vì mình muốn các bài viết này không nằm trên thứ tự thời gian nào của thực tại cả, nó chỉ xuất hiện thôi):</p>
+<p>(<em>Và cũng không dùng định nghĩa màu sơn để không phải giống bản tóm tắt của bài viết trên, nhưng định nghĩa màu sơn rất rất dễ hiểu nếu bạn muốn tìm hiểu</em>)</p>
+<p>Nhưng dùng tên Alice và Bob:</p>
+<p>Bối cảnh là, Alice muốn gửi thư cho Bob, nhưng Alice và Bob đều không muốn đơn vị chuyển phát thư đọc được thư của họ. Nhưng đơn vị chuyển phát, dù không muốn, và không hề đọc hay có ý đọc nội dung, vì một lý do gì đó vẫn phải xác nhận đây là một bức thư có nội dung, đây là thông lệ. Và điều này cả Alice và Bob đều không mong muốn.</p>
+<p>Vì vậy, sau một hai ngàn năm phát triển hệ thống chuyển phát thư tín của loài người. Alice và Bob cũng phát hiện ra một cách có thể gửi thư cho nhau mà không cần để cho đơn vị trung gian (hay ai đó) đọc được hoặc cố ý đánh cắp nội dung. Bằng cách &quot;mã hóa&quot; thư của họ trước khi gửi bằng một mật mã bí mật.</p>
+<blockquote>
+<p>Gửi text thì thông qua nhà mạng, gửi qua app thì thông qua nhà cung cấp app hoặc hệ quản trị cơ sở dữ liệu.</p>
+</blockquote>
+<p>Mật mã bí mật này chả ai biết ngoài riêng họ, người còn lại cũng không biết.</p>
+<h5 id="cau-hoi-tiep-theo-la-how">Câu hỏi tiếp theo là: How?</h5>
+<p>Làm thế nào mà mã hóa thư, ví dụ như, Alice mã hóa thư của Alice bằng mã bí mật chỉ Alice biết, thì làm sao người kia biết mã bí mật đã mã hóa cái thư đó là gì để giải mã? <em>(Trước bước đi này thì thư đã mã hóa rồi nên đơn vị chuyển phát nếu có đọc nội dung thì chỉ là một tập hợp mấy cái mã không thể hiểu gì)</em></p>
+<p>Cách làm như sau:</p>
+<ul>
+<li>Alice và Bob, mỗi người có một <strong>mã bí mật riêng, chỉ có họ biết</strong>.</li>
+<li>Alice và Bob thống nhất một <strong>mã chung có thể chia sẻ công khai</strong> ai cũng có thể biết (<em>ở đây đơn vị trung gian có thể cung cấp cho họ khóa chung cũng được không vấn đề gì - theo cách thực hiện thực tế</em>)</li>
+<li>Sau đó, họ tiến hành một thao tác tạm gọi là <strong>trộn mã khóa</strong> (<em>tạm gọi, trong thực tế dùng công thức toán, này nói sau hoặc chút nói, nhưng trên cơ bản là cũng giống trộn</em>).</li>
+<li>Thao tác trộn đơn giản là Alice trộn mã bí mật của Alice với khóa chung và gửi cho Bob, ngược lại bob cũng trộn mã bí mật của Bob với khóa chung và gửi cho Alice. <strong>Mỗi bên nhận được mã khóa đã trộn của người còn lại.</strong></li>
+</ul>
+<blockquote>
+<p>Đúng ra mình không nên cắt tóc ngay bây giờ hoặc tỉa gọn một chút thôi!</p>
+</blockquote>
+<ul>
+<li>Sau khi nhận được mã khóa đã trộn của bên còn lại, Alice <strong>dùng mã riêng</strong> của Alice <strong>để trộn vào khóa trộn</strong> mà Bob đã gửi. Bob cũng dùng khóa riêng của Bob trộn vào khóa trộn mà Alice đã gửi. <strong>Việc này đảm bảo cả hai đều có được mã khóa y như nhau</strong> mà không phải tiết lộ cho đơn vị trung gian hay người còn lại mã khóa riêng của mình.</li>
+<li>Tới đây là <strong>xong giao thức bảo mật</strong>, phần còn lại là cả hai lấy cái mã khóa như nhau đó để mã hóa nội dung thư cần gửi. Như vậy là đảm bảo không chia sẻ key bí mật cho bất cứ ai cũng như bảo mật toàn bộ nội dung cần gửi mà chỉ người nhận mới có thể giải mã và đọc được.</li>
+</ul>
+<h5 id="tan-man-ve-cong-thuc-toan-hoc-dung-de-tron">Tản mạn về công thức toán học dùng để &quot;trộn&quot;:</h5>
+<p>Ví dụ bằng công thức:  <strong>$g^x \mod p = X$</strong>  (X là mã khóa đã trộn)</p>
+<ul>
+<li>g là một số khác 0</li>
+<li>x là khóa bí mật của Alice hoặc Bob</li>
+<li>p là một số nguyên tố khổng lồ</li>
+<li><strong>X</strong> là <strong>mã khóa đã trộn</strong> được gửi công khai</li>
+</ul>
+<p>Đây là một hàm một chiều, một phương trình tìm x biết công thức tính ra X là như trên và không biết thêm gì cả.</p>
+<p>Nghĩa là không có cách nào để giải phương trình ngoài việc thử từng trường hợp giá trị <strong>x</strong> đến khi tìm ra kết quả đúng.</p>
+<p>Chi tiết hơn, với giả sử công thức trên là khóa 2048 bit, thì số lượng khả năng để thử là $\sim 2^{2048}$ khả năng</p>
+<p>Với thời gian cần để thử hết các khả năng là: $T = \frac{2^{2048}}{S}$ Với S là số phép thử mỗi giây. Ví dụ ta có một siêu máy tính hiện đại có S $\sim 10^{18}$ phép tính/giây (với các phép tính đơn giản)</p>
+<p>Nhưng giả sử có máy thử được $10^{20}$ phép tính/giây và có 1 tỷ máy như vậy, nghĩa là S = $10^{29}$</p>
+<p>Ta có được công thức tính thời gian cần để thực hiện tất cả các phép thử là: $T = \frac{2^{2048}}{2 \times 10^{29}}$ (chia 2 vì mỗi phép tính chỉ cần nửa không gian)</p>
+<p>Trong đó: $( 2^{10} \approx 10^3 ) → ( 2^{2048} = (2^{10})^{204.8} \approx 10^{616} )$</p>
+<p>-&gt; Ta có thời gian cần để thực hiện tất cả các phép thử là $( T \approx \frac{10^{616}}{2 \times 10^{29}} = 5 \times 10^{586} )$</p>
+<p><strong>Một năm thì có ~ $( 3.15 \times 10^7 )$ giây</strong></p>
+<p>-&gt; Suy ra thời gian cần là  $( T \approx 1.5 \times 10^{579} )$ năm</p>
+<p>Mà tuổi vũ trụ là 1.38 tỷ năm, là ~ $( 1.38 \times 10^{10} )$ năm</p>
+<p>-&gt; Suy ra chúng ta cần ~ $10^{569}$ lần số tuổi của vũ trụ để giải mã</p>
+<blockquote>
+<p>Xong phần tản mạn</p>
+</blockquote>
+<p>Về cơ bản thì việc giải mã ngược là bất khả thi với hàm một chiều, nhưng không biết có <em>thiên tài</em> nào có thể nghĩ ra cách khai thác lỗ hỗng trong cách thức gửi dữ liệu mã khóa hay không. Nhưng theo phương pháp nêu trên hiện tại là không có. Đây gần như là bảo mật tuyệt đối.</p>
+<blockquote>
+<p>Hoặc là nghĩ về nguyên lý phép thử, như Hàn Tín</p>
+</blockquote>
+<hr>
+<p>Không biết mình đã muốn viết ra Nguyên tắc mã hóa đầu cuối này từ hôm nào rồi. Nhưng cứ nghĩ tới nghĩ lui, và không biết post lên đâu hay dựng thêm một blog riêng cho ứng dụng đang làm, vì nó nghiêng về Toán hay lập trình nhiều hơn là Triết học. Hiện tại mình không có ý nói rằng mình biết về những mảng này, chỉ có vô tình tìm hiểu một số ít.</p>
+<p>Mình vẫn cứ tự dằn vặt mình mỗi khi đi hớt tóc về. Mong là lần cắt tóc này mình có thể để dài thật dài như ý mình muốn.</p>
+<hr>
+<blockquote>
+<p>Shen2H x Scorprien: from ashes</p>
+</blockquote>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/kimchinam/">Kim chỉ nam</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/nguoikhonannoinuavoi/">Người khôn ăn nói nửa vời</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+		</div>
+		</div>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
+</div>
+		<!-- This page `/blog/startingfromcoixaygio/` was built on 2025-12-27T16:13:53.339Z -->
+		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
+	</body>
+</html>

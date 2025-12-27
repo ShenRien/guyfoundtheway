@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Một số plugin drumkits và lv2 (ask Grok)</title>
+		<meta name="description" content="Hướng dẫn chi tiết để cài đặt và sử dụng AppImage trên Linux Mint (hoặc bất kỳ distro dựa trên Ubuntu/Debian nào)">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Guy found the way">
+
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="/favicon/startfish-apple-touch-icon.png">
+		<!-- Preconnect để load nhanh hơn -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
+		<!-- Load Lora: Regular 400, 500, 700 + Italic -->
+		<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+		<meta name="generator" content="Eleventy v3.1.2">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/* Defaults */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+:root {
+  --font-family: 'Lora', sans-serif;
+  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace; /* Bỏ "s" thừa */
+}
+
+/* Theme colors - Fix typo background */
+:root {
+  --color-gray-20: #e0e0e0;
+  --color-gray-50: #C0C0C0;
+  --color-gray-90: #333;
+  --background-color: #e9eef0; /* Thêm màu nền toàn site */
+  --content-color: #fffdfd;
+  --text-color: var(--color-gray-90);
+  --text-color-link: #360800;
+  --text-color-link-active: #6f1a0b;
+  --text-color-link-visited: #33140e;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #e33012;
+		--text-color-link-active: #591408;
+		--text-color-link-visited: #bb2208;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+
+	color: var(--text-color);
+	background-color: var(--background-cdolor);
+	height: 100%;
+	overflow: hidden;
+}
+html {
+	/*overflow: hidden;*/
+	max-width: 100%;
+	font-size: 16px;
+	line-height: 1.125;
+}
+body {
+	font-size: 1.125rem;
+}
+
+
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+  max-width: 100%;
+}
+img[width][height] {
+  height: auto;
+}
+img[src$=".svg"] {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+/*main :first-child {
+	margin-top: 0;
+}*/
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	counter-reset: start-from var(--postlist-index);
+	list-style: none;
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from -1;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+/*------------------------------------*/
+/* Obsidian Theme */
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+/*------------------------------------*/
+
+body {
+	background-color: var(--background-color);
+
+}
+
+.home-link {
+	padding-top: 4vh;
+	position: absolute;
+}
+
+.content {
+	width: 100%;
+	height: auto;
+	display: grid;
+	grid-template-columns: minmax(0, 20%) 1fr;
+}
+
+.content-nav {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	height: 100vh;
+}
+
+.nav-item a {
+   	white-space: nowrap;          /* Không xuống dòng */
+	overflow: hidden;             /* Ẩn phần tràn */
+	text-overflow: ellipsis;      /* Thêm ... khi quá dài */
+	max-width: 100%;              /* Giới hạn width theo parent */
+	display: block;               /* Để ellipsis hoạt động tốt */
+	padding: 0;
+}
+
+.nav {
+	background-color: #59140800;
+	padding-top: 30% !important; /* Reset cho theme */
+	padding-left: 2rem !important;
+	padding-right: 1rem !important;
+	top: 0;
+	overflow-y: auto;
+}
+
+.Menuheader {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: sticky;
+	top: 10px;
+	scrollbar-width: none;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+			line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.Menuheader::-webkit-scrollbar {
+	display: none;
+}
+
+.sticky-title {
+	background-color: var(--content-color);
+	text-align: center;
+	z-index: 10;
+	padding-left: 3vh;
+	padding-right: 3vh;
+	padding-top: 1.5vh;
+	padding-bottom: 1vh;
+	font-family: var(--font-family-monopsace);
+	font-size: 0.8em;
+	border-radius: 1em;
+	position: sticky;
+	top: 0;
+}
+
+
+.content-body {
+	background-color: var(--content-color);
+	height: 100vh;
+	margin-top: 100px;
+	padding: 0px 50px 0 50px;;
+	overflow-y: auto;
+	border-radius: 1em 1em 0 0;
+	box-shadow: 1px 5px 20px rgba(139, 139, 139, 0.15);
+	position: relative;
+	scrollbar-width: none;
+	margin-right: 5vh;
+}
+
+.content-container {
+	height: 100vh;
+}
+
+
+.nav {
+	padding: 8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	overflow-y: auto;
+}
+
+.nav > a {
+	color: #fff !important;
+	overflow-y: auto;
+}
+
+
+#main {
+	margin: 1vh auto 0 auto;
+	max-width: 738px;
+	overflow-y: auto;
+	/*scrollbar-width: none;*/
+	flex: 1;
+	min-height: 100px;
+	padding-bottom: 15vh;
+	z-index: 5;
+}
+
+
+
+footer {
+	text-align: right;
+	line-height: 1;
+	z-index: 15;
+	border: none;
+	font-size: medium;
+}
+
+.class-footer {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-color: var(--background-color);
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.class-footer p {
+	margin-top: 0;
+}
+
+.footer_after{
+	background-image: url('/img/Background.png');
+	position: absolute;
+	display: flex;
+	bottom: 0;
+	z-index: -1;
+	width: 100%;
+	height: auto;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+/* Firefox hỗ trợ cơ bản */
+* {
+  scrollbar-width: thin;        /* thin / auto / none */
+  scrollbar-color: #a0a0a0 rgba(255,255,255,0.5);
+}
+
+.signature-background {
+  position: absolute;
+  bottom: 1rem;
+  right: 5vw;                     /* Đổi left: 0; nếu muốn góc trái */
+  width: 200px;                 /* Tùy chỉnh size lớn nhỏ */
+  height: 200px;
+  max-width: 200px;
+  pointer-events: none;         /* Không chắn click */
+  opacity: 1;                 /* Mờ nhẹ cho subtle, tăng/giảm tùy ý */
+  z-index: 1;                   /* Phía trên main content */
+  background-image: url('/img/starfish.png'); /* Path từ public/img/ */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none;
+  border: 0 solid transparent;
+  box-sizing: border-box;
+}
+
+
+/* Small Screen */
+
+@media (max-width: 1366px) {
+	#main {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+	.content {
+		grid-template-columns: clamp (220px, 500vw, 500px) 1fr;
+	}
+}
+
+
+/* Mobile + Tablet */
+
+@media (max-width: 1024px) {
+
+.content {
+	grid-template-columns: 0% 1fr;
+}
+
+	.home-link {
+	padding-left: clamp(1vh, 5vw, 5vh);
+	}
+
+	.content-nav {
+	overflow: hidden;
+	scrollbar-width: none;
+	}
+
+	.content-body {
+
+		padding-left: clamp(1vh, 3vw, 3vw);
+		padding-right: clamp(1vh, 3vw, 3vw);
+		margin-left: clamp(1vh, 5vw, 5vh);
+		margin-right: clamp(1vh, 5vw, 5vh);
+	}
+
+	.nav {
+		display: none;
+	}
+
+	.class-footer {
+		display: none;
+	}
+
+	#main {
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 15vh;
+	max-width: 728px;
+	}
+
+	.signature-background {
+		width: 25%;
+		min-width: 100px;
+		height: auto;
+	}
+}
+
+@media (max-width: 768px) {
+#main {
+	margin-bottom: 15vh;
+}
+
+	
+}
+
+.postlistnav-item::marker {
+	font-size: 1rem;
+}
+
+.postlistnav-link {
+	font-size: 0.8em;
+}
+
+.postlistnav-date {
+	font-size: 0.6em;
+	margin-top: 0;
+	color: var(--color-gray-50);
+}
+
+pre {
+	font-size: 0.9rem !important;
+	background-color: #bb2208 !important;
+	white-space: pre-wrap !important;
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap !important;
+  white-space: -o-pre-wrap !important;
+  word-wrap: break-word !important;
+  
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+	</head>
+
+
+
+	<body>
+
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+
+
+
+		<div class="content">
+
+			<div class="content-nav">
+				<header class="Menuheader">
+					<nav>
+						<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+						<ul class="nav">
+							<li class="nav-item">
+
+							<a href="/">
+							Home
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/blog/">
+							Archive
+							</a>
+
+							
+									<a>
+									
+									<ol class="postlistnav">
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/The River/" class="postlistnav-link">The river</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Bạc Liêu luận ký I/" class="postlistnav-link">Bạc liêu luận ký I</a>
+			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Tâm linh vấn ký/" class="postlistnav-link">Tâm linh vấn ký</a>
+			<a class="postlistnav-date"><time datetime="2025-10-27">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Quân đội, lính đánh thuê và đồng minh/" class="postlistnav-link">Quân đội, lính đánh thuê và đồng minh</a>
+			<a class="postlistnav-date"><time datetime="2025-10-31">October 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/daoductoanhoc/" class="postlistnav-link">Đạo Đức Toán học</a>
+			<a class="postlistnav-date"><time datetime="2025-11-03">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kimchinam/" class="postlistnav-link">Kim chỉ nam</a>
+			<a class="postlistnav-date"><time datetime="2025-11-10">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/startingfromcoixaygio/" class="postlistnav-link">Starting from Cối Xay Gió</a>
+			<a class="postlistnav-date"><time datetime="2025-11-13">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoikhonannoinuavoi/" class="postlistnav-link">Người khôn ăn nói nửa vời</a>
+			<a class="postlistnav-date"><time datetime="2025-11-16">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Personal/" class="postlistnav-link">Personal</a>
+			<a class="postlistnav-date"><time datetime="2025-11-18">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/HeySiri/" class="postlistnav-link">HeySiri</a>
+			<a class="postlistnav-date"><time datetime="2025-11-20">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/kyvongtoichanlyonewm/" class="postlistnav-link">Hãy kỳ vọng tới chân lý xứng đáng (One week to one month)</a>
+			<a class="postlistnav-date"><time datetime="2025-11-29">November 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/nguoilamthuekhongcanphanxet/" class="postlistnav-link">Người làm thuê không cần phán xét (ask Akasha)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-11">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
+			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			</p>
+		</li>
+
+</ol>
+
+									</a>
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/about/">
+							About
+							</a>
+
+							
+
+							</li>
+							<li class="nav-item">
+
+							<a href="/feed/feed.xml">
+							Feed
+							</a>
+
+							
+
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<footer class="class-footer">
+
+					<div>
+					<p>
+						<em>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 | Namaste</a></em>
+					</p>
+					</div>
+
+				</footer>
+			</div>
+
+		<div class="content-container">
+			<a href="/" class="home-link">Guy found the way</a>
+			<!-- Phai co background hop le scr cho nay,
+			lam theo huong dan
+			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
+
+		<div class="content-body">
+		<div class="sticky-title">Một số plugin drumkits và lv2 (ask Grok)</div>
+
+
+		<main id="main">
+
+			<heading-anchors>
+
+				
+
+
+<h1 id="mot-so-plugin-drumkits-va-lv2-ask-grok">Một số plugin drumkits và lv2 (ask Grok)</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-12-23">23 December 2025</time></li>
+	<li><a href="/tags/zrythm/" class="post-tag">Zrythm</a></li>
+</ul>
+
+<p>cài đặt appimage mint</p>
+<p>Dưới đây là hướng dẫn chi tiết để <strong>cài đặt và sử dụng AppImage</strong> trên <strong>Linux Mint</strong> (hoặc bất kỳ distro dựa trên Ubuntu/Debian nào):</p>
+<h3 id="1-cach-don-gian-nhat-khuyen-nghi-cho-hau-het-nguoi-dung">1. Cách đơn giản nhất (khuyến nghị cho hầu hết người dùng)</h3>
+<ol>
+<li>
+<p><strong>Tải file AppImage về máy</strong> Ví dụ: bạn tải được file tên Kdenlive.AppImage hoặc Obsidian.AppImage,...</p>
+</li>
+<li>
+<p><strong>Cho file quyền thực thi</strong> Có 2 cách:</p>
+<ul>
+<li>
+<p><strong>Cách 1 - dùng chuột</strong> (dễ nhất) Nhấp chuột phải vào file AppImage → <strong>Properties</strong> → tab <strong>Permissions</strong> → tick vào ô <strong>Allow executing file as program</strong> → Close.</p>
+</li>
+<li>
+<p><strong>Cách 2 - dùng terminal</strong></p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">chmod +x Tên_file.AppImage</code></pre>
+<p>Ví dụ:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">chmod +x Kdenlive-24.08.2-x86_64.AppImage</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Chạy AppImage</strong></p>
+<ul>
+<li>
+<p>Nhấp đúp vào file → chương trình sẽ chạy ngay.</p>
+</li>
+<li>
+<p>Hoặc từ terminal:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">./Tên_file.AppImage</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-tich-hop-appimage-vao-menu-tao-shortcut">2. Tích hợp AppImage vào menu (tạo shortcut)</h3>
+<p>Sau khi chạy lần đầu, bạn thường muốn nó xuất hiện trong menu ứng dụng như phần mềm bình thường.</p>
+<p><strong>Cách 1 - Dùng AppImageLauncher (khuyên dùng)</strong></p>
+<p>AppImageLauncher là công cụ rất tiện lợi trên Linux Mint/Ubuntu.</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash"># Cài AppImageLauncher (có sẵn trong repository của Linux Mint)
+sudo apt update
+sudo apt install appimagelauncher</code></pre>
+<p>Sau khi cài xong:</p>
+<ul>
+<li>Khi bạn nhấp đúp lần đầu vào AppImage → AppImageLauncher sẽ hỏi: → Chọn <strong>Integrate and run</strong> → nó sẽ tự động tạo shortcut trong menu và thêm vào /home/tên_người_dùng/.local/share/applications/</li>
+</ul>
+<p><strong>Cách 2 - Tự tạo shortcut thủ công</strong></p>
+<p>Nếu không muốn dùng AppImageLauncher:</p>
+<ol>
+<li>
+<p>Tạo file .desktop Ví dụ: kdenlive.desktop</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">nano ~/.local/share/applications/kdenlive.desktop</code></pre>
+<p>Dán nội dung sau (thay đổi đường dẫn cho đúng):</p>
+<pre class="language-ini" tabindex="0"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">Desktop Entry</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Name</span><span class="token punctuation">=</span><span class="token value attr-value">Kdenlive</span>
+<span class="token key attr-name">Exec</span><span class="token punctuation">=</span><span class="token value attr-value">/home/tên_người_dùng/Downloads/Kdenlive-24.08.2-x86_64.AppImage</span>
+<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">Application</span>
+<span class="token key attr-name">Icon</span><span class="token punctuation">=</span><span class="token value attr-value">kdenlive</span>
+<span class="token key attr-name">Terminal</span><span class="token punctuation">=</span><span class="token value attr-value">false</span>
+<span class="token key attr-name">Categories</span><span class="token punctuation">=</span><span class="token value attr-value">AudioVideo;Video;</span></code></pre>
+</li>
+<li>
+<p>Cho file quyền thực thi:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">chmod +x ~/.local/share/applications/kdenlive.desktop</code></pre>
+</li>
+</ol>
+<h3 id="3-mot-so-meo-huu-ich">3. Một số mẹo hữu ích</h3>
+<ul>
+<li>
+<p><strong>Di chuyển AppImage ra thư mục cố định</strong> Nên để trong /opt/ hoặc thư mục ~/Applications/ để dễ quản lý.</p>
+<p>Ví dụ:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">mkdir -p ~/Applications
+mv Kdenlive*.AppImage ~/Applications/</code></pre>
+</li>
+<li>
+<p><strong>Cập nhật AppImage</strong> Hầu hết AppImage mới hỗ trợ tự cập nhật khi chạy:</p>
+<ul>
+<li>Mở AppImage → vào menu <strong>Help → Check for updates</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Xóa AppImage đã tích hợp</strong> Nếu dùng AppImageLauncher → nhấp chuột phải vào shortcut trong menu → <strong>Remove integration</strong></p>
+</li>
+</ul>
+<p>Chúc bạn cài đặt thành công! Nếu bạn đang cố chạy AppImage cụ thể nào mà bị lỗi, cứ gửi tên file hoặc thông báo lỗi mình hỗ trợ tiếp nhé!</p>
+<p>có bộ trống nào có thể load sample như hydrogen nhưng là lv2 không?</p>
+<p>Có, có một số <strong>plugin LV2</strong> hỗ trợ load sample/drumkit (tương tự Hydrogen), và chúng được thiết kế để dùng trong DAW (như Ardour, Carla, Reaper, Qtractor,...) với MIDI input. Dưới đây là các lựa chọn tốt nhất hiện nay (dựa trên cộng đồng Linux Audio năm 2025):</p>
+<h3 id="1-drumlabooh-khuyen-nghi-manh-nhat-hien-dai-nhat">1. <strong>Drumlabooh</strong> (Khuyến nghị mạnh nhất – hiện đại nhất)</h3>
+<ul>
+<li>
+<p><strong>Đặc điểm</strong>:</p>
+<ul>
+<li>Load trực tiếp Hydrogen drumkit (hỗ trợ đầy đủ layer, velocity).</li>
+<li>Hỗ trợ thêm SFZ và format riêng của nó.</li>
+<li>Có mixer built-in, multi-out (lên đến 36 channel), FX (LP/HP filter, Analog warmth), auto hihat choke, round-robin, layers (tối đa 127 layer/instrument).</li>
+<li>Giao diện đẹp, hỗ trợ hình ảnh drumkit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hỗ trợ</strong>: LV2 + VST3 (Linux &amp; Windows).</p>
+</li>
+<li>
+<p><strong>Link</strong>: <a href="https://psemiletov.github.io/drumlabooh/?referrer=grok.com">https://psemiletov.github.io/drumlabooh/</a></p>
+</li>
+<li>
+<p><strong>Cài đặt trên Linux Mint</strong>:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">sudo apt install git cmake build-essential libasound2-dev libfreetype6-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev libxrandr-dev libxrender-dev libfontconfig1-dev libjack-jackd2-dev libgl1-mesa-dev libglu1-mesa-dev
+git clone https://github.com/psemiletov/drumlabooh.git
+cd drumlabooh
+mkdir build && cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+make -j$(nproc)
+sudo make install</code></pre>
+<p>Sau đó load trong Carla hoặc Ardour như LV2 plugin.</p>
+</li>
+</ul>
+<h3 id="2-drumrox-fork-cua-drmr-don-gian-hon">2. <strong>Drumrox</strong> (Fork của DrMr, đơn giản hơn)</h3>
+<ul>
+<li>Load Hydrogen kit (hỗ trợ format mới nhất).</li>
+<li>Giao diện GTK, multi-out.</li>
+<li>Tương tự DrMr nhưng fix nhiều bug cũ.</li>
+<li><strong>Link</strong>: <a href="https://psemiletov.github.io/drumrox/?referrer=grok.com">https://psemiletov.github.io/drumrox/</a></li>
+<li>Thường có sẵn trong repo hoặc build từ source tương tự Drumlabooh.</li>
+</ul>
+<h3 id="3-drmr-cu-nhung-van-dung-tot">3. <strong>DrMr</strong> (Cũ nhưng vẫn dùng tốt)</h3>
+<ul>
+<li>Load Hydrogen kit (layer, velocity).</li>
+<li>Có UI GTK để chọn kit, chỉnh gain/pan.</li>
+<li>Multi-out, save state tốt.</li>
+<li><strong>Link</strong>: <a href="https://github.com/nicklan/drmr?referrer=grok.com">https://github.com/nicklan/drmr</a> (hoặc fork falkTX/drmr)</li>
+<li>Nhiều distro có sẵn (apt install drmr-lv2).</li>
+</ul>
+<h3 id="4-fabla-don-gian-load-sample-thu-cong">4. <strong>Fabla</strong> (Đơn giản, load sample thủ công)</h3>
+<ul>
+<li>LV2 drum sampler, load sample riêng lẻ (không load Hydrogen kit trực tiếp).</li>
+<li>Có sẵn một số kit (bao gồm sample từ Hydrogen).</li>
+<li><strong>Link</strong>: <a href="http://openavproductions.com/fabla/?referrer=grok.com">http://openavproductions.com/fabla/</a></li>
+<li>Thường có trong repo (apt install fabla).</li>
+</ul>
+<h3 id="5-x42-avldrums-kit-co-dinh-rat-chat-luong">5. <strong>x42-avldrums</strong> (Kit cố định, rất chất lượng)</h3>
+<ul>
+<li>Load kit AVL (Black Pearl, Red Zeppelin,...).</li>
+<li>5 velocity layers, multi-out.</li>
+<li>Không load Hydrogen kit, nhưng sound rất tốt.</li>
+<li><strong>Link</strong>: <a href="https://x42-plugins.com/x42/x42-avldrums?referrer=grok.com">https://x42-plugins.com/x42/x42-avldrums</a></li>
+<li>Cài: sudo apt install x42-plugins</li>
+</ul>
+<h3 id="6-drumkv1-old-school-load-sample">6. <strong>drumkv1</strong> (Old-school, load sample)</h3>
+<ul>
+<li>LV2 drum sampler, load sample thủ công (không Hydrogen).</li>
+<li><strong>Link</strong>: <a href="https://drumkv1.sourceforge.io/?referrer=grok.com">https://drumkv1.sourceforge.io/</a></li>
+</ul>
+<p><strong>Tóm lại</strong>:</p>
+<ul>
+<li>Nếu bạn muốn <strong>gần giống Hydrogen nhất</strong> (load kit trực tiếp, layer, velocity) → <strong>Drumlabooh</strong> là lựa chọn tốt nhất hiện tại.</li>
+<li>Nếu dùng Ardour/Carla → thử Drumlabooh hoặc Drumrox.</li>
+</ul>
+<p>Bạn dùng DAW nào (Ardour, Carla,...)? Nếu cần hướng dẫn build/cài cụ thể cho Mint, mình hỗ trợ thêm nhé!</p>
+<p>1,3 giây</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FIGf6CQXoFSGI8dYw-A5oN3ftJ8RFtgAlFM8T9yFDPjc%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvODRiNjBhZmIw%2FMTYwNTNmNjNhYjc2%2FMDExODQ0YzM5ODBj%2FYThjMTM4ODZjYTlk%2FZjkzMDNiMjE1MzNl%2FMGIwMWQ2Ni9saW51%2FeC1hdWRpby1kZXYu%2FbGludXhhdWRpby5u%2FYXJraXZlLmNvbS8&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FIGf6CQXoFSGI8dYw-A5oN3ftJ8RFtgAlFM8T9yFDPjc%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvODRiNjBhZmIw%2FMTYwNTNmNjNhYjc2%2FMDExODQ0YzM5ODBj%2FYThjMTM4ODZjYTlk%2FZjkzMDNiMjE1MzNl%2FMGIwMWQ2Ni9saW51%2FeC1hdWRpby1kZXYu%2FbGludXhhdWRpby5u%2FYXJraXZlLmNvbS8&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FIGf6CQXoFSGI8dYw-A5oN3ftJ8RFtgAlFM8T9yFDPjc%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvODRiNjBhZmIw%2FMTYwNTNmNjNhYjc2%2FMDExODQ0YzM5ODBj%2FYThjMTM4ODZjYTlk%2FZjkzMDNiMjE1MzNl%2FMGIwMWQ2Ni9saW51%2FeC1hdWRpby1kZXYu%2FbGludXhhdWRpby5u%2FYXJraXZlLmNvbS8&width=32&format=jpeg&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FKa3AeES8OY8Dn-ZtlzFoYz6f0ri9SCKtSmCJagw7gs8%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMjdlZjk4ZjI2%2FYmM4OGQ1YmFjYjg5%2FZGYzMjlhMzA2ODYy%2FMTNmODFiMmJiMmRm%2FYjg5YWMxMzc5MmZk%2FNjM5ZTQyZS9vcGVu%2FaHViLm5ldC8&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FKa3AeES8OY8Dn-ZtlzFoYz6f0ri9SCKtSmCJagw7gs8%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMjdlZjk4ZjI2%2FYmM4OGQ1YmFjYjg5%2FZGYzMjlhMzA2ODYy%2FMTNmODFiMmJiMmRm%2FYjg5YWMxMzc5MmZk%2FNjM5ZTQyZS9vcGVu%2FaHViLm5ldC8&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FKa3AeES8OY8Dn-ZtlzFoYz6f0ri9SCKtSmCJagw7gs8%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMjdlZjk4ZjI2%2FYmM4OGQ1YmFjYjg5%2FZGYzMjlhMzA2ODYy%2FMTNmODFiMmJiMmRm%2FYjg5YWMxMzc5MmZk%2FNjM5ZTQyZS9vcGVu%2FaHViLm5ldC8&width=32&format=jpeg&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p>75 sources</p>
+<p>dùng zrythm, nó tự động load lv2 không?</p>
+<p>Có! <strong>Zrythm</strong> hỗ trợ <strong>tự động load LV2 plugin</strong> rất tốt, và đây là một trong những điểm mạnh của nó so với một số DAW khác.</p>
+<h3 id="cach-zrythm-load-lv2">Cách Zrythm load LV2</h3>
+<ol>
+<li>
+<p><strong>Tự động quét LV2</strong> Khi bạn mở Zrythm lần đầu (hoặc sau khi cài plugin mới), nó sẽ <strong>tự động quét</strong> các thư mục LV2 chuẩn:</p>
+<ul>
+<li>/usr/lib/lv2/</li>
+<li>/usr/lib64/lv2/</li>
+<li>/usr/local/lib/lv2/</li>
+<li>~/.lv2/</li>
+<li>~/.local/share/lv2/</li>
+</ul>
+<p>→ Nếu bạn cài plugin LV2 bằng sudo apt install hoặc build từ source (với make install), Zrythm sẽ tự nhận diện.</p>
+</li>
+<li>
+<p><strong>Chỉ cần refresh plugin</strong> Nếu bạn vừa cài plugin mà Zrythm chưa thấy:</p>
+<ul>
+<li>Vào <strong>Edit → Preferences → Plugins</strong> → nhấn nút <strong>Scan for new plugins</strong> (hoặc <strong>Rescan</strong>).</li>
+<li>Hoặc restart Zrythm là nó quét lại.</li>
+</ul>
+</li>
+<li>
+<p><strong>Thêm plugin vào project</strong></p>
+<ul>
+<li>Nhấn <strong>+</strong> ở track mới → chọn <strong>Instrument</strong> → tìm plugin LV2 (như Drumlabooh, Drumrox, x42-avldrums,...) trong danh sách.</li>
+<li>Zrythm hiển thị rõ ràng <strong>LV2</strong> bên cạnh tên plugin, và có filter để lọc theo loại (Drum, Sampler, Synth,...).</li>
+</ul>
+</li>
+</ol>
+<h3 id="luu-y-khi-dung-zrythm-voi-drum-plugin-lv2">Lưu ý khi dùng Zrythm với drum plugin LV2</h3>
+<ul>
+<li><strong>Drumlabooh</strong>, <strong>Drumrox</strong>, <strong>DrMr</strong>, <strong>x42-avldrums</strong> đều hoạt động tốt trong Zrythm.</li>
+<li>Nếu plugin có <strong>multi-output</strong> (như Drumlabooh hoặc x42-avldrums), Zrythm hỗ trợ <strong>routing riêng từng channel</strong> (ví dụ: kick ra bus 1, snare ra bus 2,...).</li>
+<li>Zrythm cũng hỗ trợ <strong>MIDI patterns</strong> để lập trình beat rất dễ, tương tự Hydrogen.</li>
+</ul>
+<h3 id="kiem-tra-plugin-da-load-chua">Kiểm tra plugin đã load chưa</h3>
+<ul>
+<li>Vào <strong>Window → Plugin Browser</strong> → tab <strong>Instruments</strong> hoặc <strong>Drums</strong>.</li>
+<li>Nếu thấy plugin như <strong>Drumlabooh</strong> hoặc <strong>x42 AVL Drums</strong>, là đã OK.</li>
+</ul>
+<p>Nếu bạn đang dùng <strong>Linux Mint</strong> và muốn thử <strong>Drumlabooh</strong> (tốt nhất cho Hydrogen-like), cứ làm theo hướng dẫn build mình gửi trước đó. Sau khi build xong, chạy Zrythm → Rescan plugin → sẽ thấy ngay.</p>
+<p>Bạn đã thử cài plugin nào chưa, hay cần mình hướng dẫn chi tiết build Drumlabooh cho Zrythm?</p>
+<p>1,6 giây</p>
+<p>có bộ plugin nào mạnh như wave cho zrythm mint không?</p>
+<p>Có, trong <strong>Zrythm</strong> trên <strong>Linux Mint</strong> (và Linux nói chung), bạn không có <strong>plugin LV2</strong> nào &quot;mạnh như Waves&quot; (vì Waves là bundle thương mại cao cấp, chuyên nghiệp, với sound signature đặc trưng như CLA-2A, SSL, H-Delay, API,...). Tuy nhiên, có nhiều bộ <strong>LV2 plugin miễn phí/mở nguồn</strong> chất lượng cao, chuyên nghiệp, được cộng đồng Linux Audio dùng thay thế rất tốt cho Waves.</p>
+<p>Dưới đây là các bộ <strong>LV2 mạnh nhất</strong> (2025) cho mixing/mastering trong Zrythm:</p>
+<h3 id="1-calf-studio-gear-bo-tot-nhat-gan-waves-nhat">1. <strong>Calf Studio Gear</strong> (Bộ tốt nhất, gần Waves nhất)</h3>
+<ul>
+<li>
+<p><strong>Tại sao mạnh?</strong> Đây là suite LV2 <strong>hoàn chỉnh nhất</strong> cho Linux: compressor, multiband compressor, limiter, EQ parametric, de-esser, gate, reverb, delay, exciter, stereo tools,... Nhiều người so sánh sound của Calf compressor/multiband với Waves CLA series hoặc SSL (clean, musical, không bị distort khi đẩy mạnh). Multiband compressor/limiter rất pro cho mastering.</p>
+</li>
+<li>
+<p><strong>Cài trên Linux Mint</strong>:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">sudo apt update
+sudo apt install calf-plugins</code></pre>
+</li>
+<li>
+<p><strong>Trong Zrythm</strong>: Tự động load sau rescan → dùng cho track/instrument/master bus.</p>
+</li>
+</ul>
+<h3 id="2-x42-plugins-rat-manh-clean-and-transparent">2. <strong>x42-plugins</strong> (Rất mạnh, clean &amp; transparent)</h3>
+<ul>
+<li>
+<p><strong>Tại sao mạnh?</strong> Compressor (darc.lv2 - inspired by zita-dc1, rất clean), limiter (dpl.lv2 - look-ahead peak limiter), EQ parametric (fil4.lv2), matrix mixer, meters pro,... Sound transparent, ít màu, giống Waves API/SSL clean series. Limiter dpl.lv2 thay thế tốt cho Waves L2/L3.</p>
+</li>
+<li>
+<p><strong>Cài</strong>:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">sudo apt install x42-plugins</code></pre>
+</li>
+<li>
+<p><strong>Khuyến nghị</strong>: Dùng x42-compressor + x42-limiter + fil4 EQ cho chain master.</p>
+</li>
+</ul>
+<h3 id="3-lsp-plugins-bo-lv2-lon-nhat-cuc-ky-manh">3. <strong>LSP-plugins</strong> (Bộ LV2 lớn nhất, cực kỳ mạnh)</h3>
+<ul>
+<li>
+<p><strong>Tại sao mạnh?</strong> Hơn 300 plugin: compressor (mono/stereo/multiband), EQ parametric/dynamic, limiter, gate, de-esser, maximizer, tape saturation, reverb,... Compressor/limiter/multiband của LSP rất pro, sound sạch, transparent, được dùng trong mixing/mastering pro. Có dynamic EQ, sidechain compressor giống Waves F6.</p>
+</li>
+<li>
+<p><strong>Cài</strong>:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">sudo apt install lsp-plugins-lv2</code></pre>
+</li>
+<li>
+<p><strong>Trong Zrythm</strong>: Tìm &quot;LSP Compressor Stereo&quot; hoặc &quot;LSP Multiband Compressor&quot;.</p>
+</li>
+</ul>
+<h3 id="4-zamaudio-compressor-and-multiband-hay-nhat">4. <strong>ZamAudio</strong> (Compressor &amp; Multiband hay nhất)</h3>
+<ul>
+<li>
+<p><strong>Tại sao mạnh?</strong> ZamComp, ZaMultiComp (multiband compressor), ZaMaximizer,... sound rất musical, punchy, thay thế tốt Waves SSL G Compressor hoặc multiband.</p>
+</li>
+<li>
+<p><strong>Cài</strong>:</p>
+<pre class="language-Bash" tabindex="0"><code class="language-Bash">sudo apt install zam-plugins</code></pre>
+</li>
+</ul>
+<h3 id="5-infamous-plugins-them-mau-analog">5. <strong>Infamous Plugins</strong> (Thêm màu analog)</h3>
+<ul>
+<li>Distortion, waveshaper, tape emulation,... thay thế Waves J37 hoặc Abbey Road.</li>
+<li><strong>Cài</strong>: Build từ GitHub<a href="https://github.com/ssj71/infamousPlugins">github.com</a> hoặc dùng repo nếu có.</li>
+</ul>
+<h3 id="6-zrythms-own-zplugins-di-kem-zrythm">6. <strong>Zrythm's own ZPlugins</strong> (Đi kèm Zrythm)</h3>
+<ul>
+<li>EQ, compressor, limiter, reverb,... cơ bản nhưng chất lượng cao.</li>
+<li>Cài: Khi cài Zrythm, nó tự bundle.</li>
+</ul>
+<h3 id="tom-tat-so-sanh-voi-waves-thay-the-gan-nhat">Tóm tắt so sánh với Waves (thay thế gần nhất)</h3>
+<table>
+<thead>
+<tr>
+<th>Waves Plugin</th>
+<th>LV2 Thay Thế Tốt Nhất</th>
+<th>Bộ Plugin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLA-2A / CLA-76</td>
+<td>Calf Compressor, x42-darc, LSP Compressor</td>
+<td>Calf, x42, LSP</td>
+</tr>
+<tr>
+<td>SSL G Compressor</td>
+<td>ZamComp, x42-darc</td>
+<td>ZamAudio, x42</td>
+</tr>
+<tr>
+<td>API / SSL EQ</td>
+<td>Calf 8-band EQ, x42-fil4, LSP Parametric EQ</td>
+<td>Calf, x42, LSP</td>
+</tr>
+<tr>
+<td>F6 Dynamic EQ</td>
+<td>LSP Dynamic EQ (rất mạnh)</td>
+<td>LSP-plugins</td>
+</tr>
+<tr>
+<td>L2/L3 Limiter</td>
+<td>x42-dpl, Calf Limiter, LSP Limiter</td>
+<td>x42, Calf, LSP</td>
+</tr>
+<tr>
+<td>Multiband</td>
+<td>Calf Multiband Compressor/Limiter</td>
+<td>Calf</td>
+</tr>
+<tr>
+<td>Tape Saturation</td>
+<td>Infamous Tape, ChowTapeModel (nếu có LV2 port)</td>
+<td>Infamous</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Khuyến nghị cho Zrythm trên Mint</strong>: Bắt đầu với <strong>Calf + x42 + LSP</strong> (cài hết bằng apt). Sau đó rescan plugin trong Zrythm (Edit → Preferences → Plugins → Rescan). Chain master: LSP Compressor → Calf Multiband Compressor → x42 Limiter + Meter.</p>
+<p>Nếu bạn cần sound &quot;màu&quot; analog hơn (như CLA series), thử thêm <strong>Infamous</strong> hoặc <strong>Chow</strong> plugins (có LV2).</p>
+<p>Bạn muốn chain cụ thể cho vocal/mastering hay cần hướng dẫn build plugin nào? Mình hỗ trợ tiếp! 🎛️</p>
+<p>1,2 giây</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FnN2tIjHApHKwiDHgH-ojxlkhPm0-KE-J9-nWF5rgpSQ%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMmQ1MGZiOGUw%2FM2Q1N2U4NjEwYmQy%2FODQ3MzQyMjUzOWEy%2FMDU1NDQ2ZGZlYmUz%2FYWRmM2M0NzNhMTMz%2FYTVmMzZkYy93d3cu%2FbG9vcGVybWFuLmNv%2FbS8&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FnN2tIjHApHKwiDHgH-ojxlkhPm0-KE-J9-nWF5rgpSQ%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMmQ1MGZiOGUw%2FM2Q1N2U4NjEwYmQy%2FODQ3MzQyMjUzOWEy%2FMDU1NDQ2ZGZlYmUz%2FYWRmM2M0NzNhMTMz%2FYTVmMzZkYy93d3cu%2FbG9vcGVybWFuLmNv%2FbS8&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FnN2tIjHApHKwiDHgH-ojxlkhPm0-KE-J9-nWF5rgpSQ%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvMmQ1MGZiOGUw%2FM2Q1N2U4NjEwYmQy%2FODQ3MzQyMjUzOWEy%2FMDU1NDQ2ZGZlYmUz%2FYWRmM2M0NzNhMTMz%2FYTVmMzZkYy93d3cu%2FbG9vcGVybWFuLmNv%2FbS8&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2F2Jc5hqFpbJGNZ3zerbDfTaduqBO0nkoLwGgND62r62s%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvY2Q1ZjQ1Y2Fj%2FYzEwMDJiZDI0YWFj%2FYzIyNjMyOGI3MWRm%2FYWE0YTEzOGNkYTBl%2FYWJlOTI0YTg0ZmVm%2FYTkzMzU3NC9tYW51%2FYWwuenJ5dGhtLm9y%2FZy8&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2F2Jc5hqFpbJGNZ3zerbDfTaduqBO0nkoLwGgND62r62s%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvY2Q1ZjQ1Y2Fj%2FYzEwMDJiZDI0YWFj%2FYzIyNjMyOGI3MWRm%2FYWE0YTEzOGNkYTBl%2FYWJlOTI0YTg0ZmVm%2FYTkzMzU3NC9tYW51%2FYWwuenJ5dGhtLm9y%2FZy8&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2F2Jc5hqFpbJGNZ3zerbDfTaduqBO0nkoLwGgND62r62s%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvY2Q1ZjQ1Y2Fj%2FYzEwMDJiZDI0YWFj%2FYzIyNjMyOGI3MWRm%2FYWE0YTEzOGNkYTBl%2FYWJlOTI0YTg0ZmVm%2FYTkzMzU3NC9tYW51%2FYWwuenJ5dGhtLm9y%2FZy8&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p>65 sources</p>
+<p>dùng dumlahnoo sao để lấy kit từ hydrogen được?</p>
+<p>Có, <strong>Drumlabooh</strong> hỗ trợ load <strong>Hydrogen drumkit</strong> trực tiếp (định dạng .h2drumkit hoặc thư mục chứa drumkit.xml + samples), và đây là một trong những tính năng chính của nó (tương thích tốt với Hydrogen kit format hiện đại).</p>
+<h3 id="cach-load-hydrogen-kit-vao-drumlabooh-trong-zrythm">Cách load Hydrogen kit vào Drumlabooh (trong Zrythm)</h3>
+<ol>
+<li>
+<p><strong>Đảm bảo kit Hydrogen đã có sẵn</strong> Hydrogen kit thường nằm ở:</p>
+<ul>
+<li>~/.hydrogen/data/drumkits/ (user kits)</li>
+<li>/usr/share/hydrogen/data/drumkits/ (system kits)</li>
+<li>Hoặc thư mục bạn tự copy (ví dụ: ~/Drumkits/).</li>
+</ul>
+<p>Nếu bạn dùng kit từ Hydrogen, chỉ cần giữ nguyên cấu trúc: thư mục kit chứa drumkit.xml và các file sample (.wav/.ogg).</p>
+</li>
+<li>
+<p><strong>Load trong Drumlabooh GUI</strong></p>
+<ul>
+<li>Trong Zrythm: Thêm track Instrument → Load Drumlabooh (LV2).</li>
+<li>Mở plugin GUI (nhấp đúp vào plugin).</li>
+<li>Ở phần <strong>Kit selector</strong> (thường là dropdown hoặc button &quot;Load kit&quot; ở top):
+<ul>
+<li>Chọn <strong>Hydrogen</strong> (hoặc nó tự detect).</li>
+<li>Duyệt đến thư mục kit → chọn thư mục chứa drumkit.xml (hoặc file .h2drumkit nếu có).</li>
+<li>Load → Plugin sẽ đọc XML, load samples, và hiển thị instruments (tối đa 36 slots, hỗ trợ layers lên đến 16 từ Hydrogen, auto hihat choke,...).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Nếu không thấy kit trong list</strong></p>
+<ul>
+<li>Drumlabooh scan các thư mục chuẩn của Hydrogen + một số custom.</li>
+<li>Để thêm thư mục custom: Tạo thư mục ~/drum_dirs/ (hoặc ~/.drumlabooh/drum_dirs/) → copy kit Hydrogen vào đó (ví dụ: ~/drum_dirs/MyHydrogenKit/).
+<ul>
+<li>Restart Zrythm hoặc reload plugin → kit sẽ xuất hiện trong selector (có &quot;magic&quot; scan như dev nói).</li>
+</ul>
+</li>
+<li>Hoặc build/install với -DINSTALLKITS=OFF nếu bạn không muốn kit default (nhưng vẫn load manual được).</li>
+</ul>
+</li>
+<li>
+<p><strong>Mẹo dùng Hydrogen kit tốt hơn trong Drumlabooh</strong></p>
+<ul>
+<li><strong>MIDI mapping</strong>: Đặt &quot;MIDI map mode&quot; trong GUI thành <strong>&quot;Kit&quot;</strong> (nếu kit có note mapping trong XML) → giữ nguyên mapping từ Hydrogen (thường GM standard).</li>
+<li>Nếu mapping bị lệch → dùng <strong>&quot;Auto&quot;</strong> và chỉnh &quot;Base MIDI note&quot; (default 36).</li>
+<li>Kit load xong, bạn thấy log ở GUI (kit type: Hydrogen, RAM used, load time) – nếu lỗi, check log để fix (thường do sample path sai).</li>
+</ul>
+</li>
+<li>
+<p><strong>Nếu gặp vấn đề</strong></p>
+<ul>
+<li>Đảm bảo dùng phiên bản <strong>Drumlabooh mới nhất</strong> (hiện 12.0.0 hoặc cao hơn, fix nhiều bug Hydrogen loader).</li>
+<li>Nếu kit cũ (Hydrogen &lt;1.0), thử convert bằng Hydrogen trước (load → save lại).</li>
+<li>Check DAW compatibility wiki: <a href="https://github.com/psemiletov/drumlabooh/wiki/DAW-Compatibility?referrer=grok.com">https://github.com/psemiletov/drumlabooh/wiki/DAW-Compatibility</a> (Zrythm hỗ trợ tốt LV2).</li>
+</ul>
+</li>
+</ol>
+<p>Bạn thử load kit nào cụ thể chưa? Nếu gặp lỗi (ví dụ: &quot;failed to load samples&quot; hoặc crash), gửi tên kit/log mình check giúp! 🎶</p>
+<p>1,9 giây</p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p><picture><source type="image/avif" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=avif&via=transform 32w"><source type="image/webp" srcset="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=webp&via=transform 32w"><img loading="lazy" decoding="async" src="/.11ty/image/?src=https%3A%2F%2Fimgs.search.brave.com%2FxxsA4YxzaR0cl-DBsH9-lpv2gsif3KMYgM87p26bs_o%2Frs%3Afit%3A32%3A32%3A1%3A0%2Fg%3Ace%2FaHR0cDovL2Zhdmlj%2Fb25zLnNlYXJjaC5i%2FcmF2ZS5jb20vaWNv%2FbnMvYWQyNWM1NjA5%2FZjZmZjNlYzI2MDNk%2FN2VkNmJhYjE2MzZl%2FMDY5ZTMxMDUzZmY1%2FNmU3NWIzNWVmMjk0%2FNTBjMjJjZi9naXRo%2FdWIuY29tLw&width=32&format=png&via=transform" alt="Web page favicon" width="32" height="32"></picture></p>
+<p>55 sources</p>
+<h1 id="are-you-satisfied-with-groks-answer">Are you satisfied with Grok's answer?</h1>
+<h2 id="nang-cap-len-supergrok">Nâng cấp lên SuperGrok</h2>
+<p>Hướng dẫn cài đặt AppImage trên Linux Mint - Grok</p>
+<hr>
+<p>Shen2H X Scorprien: from ashses</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/nguoilamthuekhongcanphanxet/">Người làm thuê không cần phán xét (ask Akasha)</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/untitled/Untitled/">Untitled</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+		</div>
+		</div>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
+</div>
+		<!-- This page `/blog/Một số plugin drumkits và lv2 (ask Grok)/` was built on 2025-12-27T16:13:53.340Z -->
+		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
+	</body>
+</html>

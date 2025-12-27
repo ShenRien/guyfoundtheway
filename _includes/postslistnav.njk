@@ -1,0 +1,14 @@
+<ol class="postlistnav">
+
+	{%- for post in postslist %}
+
+		<li class="postlistnav-item{% if post.url == url %} postlistnav-item-active{% endif %}">
+			<p class="postlistnav-paragraph">
+			<a href="{{ post.url }}" class="postlistnav-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+			<a class="postlistnav-date"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL yyyy") }}</time></a>
+			</p>
+		</li>
+
+	{%- endfor %}
+
+</ol>
