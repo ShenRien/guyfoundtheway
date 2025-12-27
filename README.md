@@ -1,6 +1,5 @@
 # guyfoundtheway
 Guy find the way (blog version 2)
-<<<<<<< HEAD
 =======
 
 Đây là gftw blog version tự build từ mã nguồn gốc của @11ty eleventy-base-blog v9.
