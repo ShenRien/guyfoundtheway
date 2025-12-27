@@ -1,6 +1,9 @@
 # guyfoundtheway
 Guy find the way (blog version 2)
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 9d5ad9f (GFTW update full files)
 
 Đây là gftw blog version tự build từ mã nguồn gốc của @11ty eleventy-base-blog v9.
 
@@ -19,4 +22,3 @@ Theme được chia sẻ miễn phí cho bất cứ ai muốn sử dụng, chỉ
 README cũng sẽ được cập nhật liên tục.
 
 Om Nama Shivaya !
->>>>>>> fdded4b (Uploaded Guy Found The Way)

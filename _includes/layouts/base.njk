@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="{{ metadata.language }}">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title or metadata.title }}</title>
+		<meta name="description" content="{{ description or metadata.description }}">
+		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="/favicon/startfish-apple-touch-icon.png">
+
+
+		{#- Font Lora cho viết và đọc #}
+		<!-- Preconnect để load nhanh hơn -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+		<!-- Load Lora: Regular 400, 500, 700 + Italic -->
+		<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+
+		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
+		<meta name="generator" content="{{ eleventy.generator }}">
+
+		{#-
+		Plain-text bundles are provided via the `eleventy-plugin-bundle` plugin:
+		1. CSS:
+			* Add to a per-page bundle using `{% css %}{% endcss %}`
+			* Retrieve bundle content using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
+		2. Or for JavaScript:
+			* Add to a per-page bundle using `{% js %}{% endjs %}`
+			* Retrieve via `{% getBundle "js" %}` or `{% getBundleFileUrl "js" %}`
+		3. Learn more: https://github.com/11ty/eleventy-plugin-bundle
+		#}
+
+		{#- Add CSS to the bundle #}
+		<style>/* This is an arbitrary CSS string added to the bundle */</style>
+
+		{#- Add the contents of a file to the bundle #}
+		<style>{% include "css/index.css" %}</style>
+
+		{#- Or you can add from node_modules #}
+		{# <style>{% include "node_modules/something.css" %}</style> #}
+
+		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
+		<style>{% getBundle "css" %}</style>
+
+		{#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
+		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
+
+		{#- Add the heading-anchors web component to the JavaScript bundle #}
+		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+	</head>
+
+
+
+	<body>
+
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+
+
+
+		<div class = "content">
+
+			<div class = "content-nav">
+				<header class="Menuheader">
+
+					{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/
+							Chỗ này là bên thanh tìm kiếm và menu nav
+					#}
+					<nav>
+						<h2 class="visually-hidden">Top level navigation menu</h2>
+						<ul class="nav">
+						{%- for entry in collections.all | eleventyNavigation %}
+							<li class="nav-item">
+
+							<a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>
+							{{ entry.title }}
+							</a>
+
+							{% if entry.title == 'Archive' %}
+									<a>
+									{% set postslist = collections.posts %}
+									{% include "postslistnav.njk" %}
+									</a>
+							{% endif %}
+
+							</li>
+						{%- endfor %}
+						</ul>
+					</nav>
+				</header>
+
+				<footer class="class-footer">
+
+					<div>
+					<p>
+						<em>Built with @Shen2H x <a href="https://www.11ty.dev/">{{ eleventy.generator }} | Namaste</a></em>
+					</p>
+					</div>
+
+				</footer>
+			</div>
+
+		<div class="content-container">
+		{#- Phần tiêu đề #}
+			<a href="/" class="home-link">{{ metadata.title }}</a>
+			<!-- Phai co background hop le scr cho nay,
+			lam theo huong dan
+			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
+
+		<div class="content-body">
+		<div class="sticky-title">{{ title }}</div>
+
+
+		<main id="main">
+
+			<heading-anchors>
+
+				{{ content | safe }}
+			</heading-anchors>
+		</main>
+		</div>
+		</div>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+     		alt="" class="signature-background">
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+     		alt="" class="footer_after">
+</div>
+		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
+		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+	</body>
+</html>
