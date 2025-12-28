@@ -9,7 +9,10 @@
 
 		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
-		<link rel="apple-touch-icon" href="/favicon/startfish-apple-touch-icon.png">
+		<link rel="apple-touch-icon" href="/favicon/starfish-apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="/favicon/starfish-apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon/starfish-apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon/starfish-apple-touch-icon.png">
 		<!-- Preconnect để load nhanh hơn -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -45,6 +48,7 @@
   --text-color-link: #360800;
   --text-color-link-active: #6f1a0b;
   --text-color-link-visited: #33140e;
+  --shadow-color: rgba(139, 139, 139, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -52,12 +56,12 @@
 		--color-gray-20: #e0e0e0;
 		--color-gray-50: #C0C0C0;
 		--color-gray-90: #dad8d8;
-
+		--content-color: hsl(208, 20%, 17%);
 		/* --text-color is assigned to --color-gray-_ above */
 		--text-color-link: #e33012;
 		--text-color-link-active: #591408;
 		--text-color-link-visited: #bb2208;
-
+		--shadow-color: rgba(22, 22, 22, 0.741);
 		--background-color: #15202b;
 	}
 }
@@ -411,23 +415,32 @@ body {
 	top: 0;
 }
 
+.content-container {
+	height: auto;
+	display: grid;
+	grid-template-rows: minmax(0, 20%) 1fr;
+}
+
+.content-home {
+
+	position: relative;
+	display: flex;
+}
 
 .content-body {
+	position: relative;
+	flex: 1fr;
 	background-color: var(--content-color);
-	height: 100vh;
-	margin-top: 100px;
+	height: 90vh;
 	padding: 0px 50px 0 50px;;
 	overflow-y: auto;
 	border-radius: 1em 1em 0 0;
-	box-shadow: 1px 5px 20px rgba(139, 139, 139, 0.15);
-	position: relative;
+	box-shadow: 1px 5px 20px var(--shadow-color);
 	scrollbar-width: none;
 	margin-right: 5vh;
 }
 
-.content-container {
-	height: 100vh;
-}
+
 
 
 .nav {
@@ -907,14 +920,21 @@ pre[class*="language-diff-"] {
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
 			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
-			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			<a class="postlistnav-date"><time datetime="2025-12-27">December 2025</time></a>
 			</p>
 		</li>
 
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
 			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
-			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			<a class="postlistnav-date"><time datetime="2025-12-27">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/Toithuhaithamlam/" class="postlistnav-link">Tội thứ 2 - Tham lam</a>
+			<a class="postlistnav-date"><time datetime="2025-12-28">December 2025</time></a>
 			</p>
 		</li>
 
@@ -950,7 +970,7 @@ pre[class*="language-diff-"] {
 
 					<div>
 					<p>
-						<em>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 | Namaste</a></em>
+						<em><a>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 </a>| Aloha</a></em>
 					</p>
 					</div>
 
@@ -958,11 +978,12 @@ pre[class*="language-diff-"] {
 			</div>
 
 		<div class="content-container">
+		<div class="content-home">
 			<a href="/" class="home-link">Guy found the way</a>
 			<!-- Phai co background hop le scr cho nay,
 			lam theo huong dan
 			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
-
+		</div>
 		<div class="content-body">
 		<div class="sticky-title">Người làm thuê không cần phán xét (ask Akasha)</div>
 
@@ -1119,7 +1140,7 @@ Và lần đó, cậu sẽ <em>không quay đi</em>.</p>
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
 </div>
-		<!-- This page `/blog/nguoilamthuekhongcanphanxet/` was built on 2025-12-27T16:13:53.339Z -->
+		<!-- This page `/blog/nguoilamthuekhongcanphanxet/` was built on 2025-12-28T20:29:04.108Z -->
 		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
 	</body>
 </html>
