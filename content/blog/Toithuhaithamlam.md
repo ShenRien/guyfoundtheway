@@ -6,9 +6,9 @@ dateCreated: 2025-12-28
 description: "Cải tội bảy mối có bảy đức: - Thứ hai: rộng rãi, chớ hà tiện"
 title: Tội thứ 2 - Tham lam
 ---
-> Chắc là có hơi quá sức với mình rồi, đừng viết nữa. Đừng cố gắng làm gì nhiều thêm nữa, chạy đua với ai mới đươc? Trong khi ai cũng cố chạy 
+> Chắc là có hơi quá sức với mình rồi, đừng viết nữa. Đừng cố gắng làm gì nhiều thêm nữa, chạy đua với ai mới được? Trong khi ai cũng cố chạy 
 
-Cố làm một cái gì đó cũng mang hàm ý giống như tham lam vậy. Có thể đây alf một phạm trù khác. Để nói sau.
+Cố làm một cái gì đó cũng mang hàm ý giống như tham lam vậy. Có thể đây là một phạm trù khác. Để nói sau.
 
 Rộng rãi nên là một phẩm chất mà ai cũng nên có. Ý là, cũng nên đúng chỗ đúng người. Nhưng cơ bản thì nên rộng rãi. Đôi khi sau này nhớ lại, có lúc mình đã rất tiếc vì trước đó có những chuyện mình đã không làm.
 
