@@ -4,6 +4,7 @@ tags:
   - articles
 dateCreated: 2025-12-28
 description: "Cải tội bảy mối có bảy đức: - Thứ hai: rộng rãi, chớ hà tiện"
+title: Tội thứ 2 - Tham lam
 ---
 > Chắc là có hơi quá sức với mình rồi, đừng viết nữa. Đừng cố gắng làm gì nhiều thêm nữa, chạy đua với ai mới đươc? Trong khi ai cũng cố chạy 
 
