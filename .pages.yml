@@ -1,0 +1,21 @@
+content:
+  - name: posts
+    label: Posts
+    path: content
+    type: collection
+    subfolders: false
+    filename: "{primary}.md"
+    view:
+      fields: [ title, date ]
+      primary: title
+      sort: [ date, title ]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true}
+      - { name: description, label: Description, type: string, options: {maxlength: 180}, required: true}
+      - { name: date, label: Date, type: date, options: {format: yyyy-MM-dd'T'HH:mm:ss, time: true}, required: true}
+      - { name: tags, label: Tags, type: string, list: {collapsible: true, min: 1, max: 5, default: [new]}, required: true}
+      - { name: body, label: Body, type: rich-text, required: true}
+      - { name: image, label: Image, type: image}
