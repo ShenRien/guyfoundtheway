@@ -4,8 +4,8 @@ title: Quên
 description: Mỗi bước chân đi là một tôn giáo
 date: 2026-01-02T15:53:00
 tags:
-  - Tusixmode
-  - Artucles
+  - tusixmode
+  - artucles
 ---
 Mình thấy rằng mình chả quên gì cả. Hay là do mình đã nhớ quá nhiều?! Mình tìm đủ mọi cách để nhớ về mọi thứ. Mà như người ta nói, nếu nhớ quá nhiều thì chẳng còn chỗ nào để mà quên nữa cả.
 
