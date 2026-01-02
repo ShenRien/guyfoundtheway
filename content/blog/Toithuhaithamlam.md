@@ -2,7 +2,7 @@
 tags:
   - tusixmode
   - articles
-dateCreated: 2025-12-28
+dateCreated: 2025-12-28T12:30:00
 description: "Cải tội bảy mối có bảy đức: - Thứ hai: rộng rãi, chớ hà tiện"
 title: Tội thứ 2 - Tham lam
 ---
