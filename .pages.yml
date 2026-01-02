@@ -1,7 +1,7 @@
 content:
   - name: posts
     label: Posts
-    path: content/posts
+    path: content/blog
     type: collection
     subfolders: false
     filename: "{primary}.md"
