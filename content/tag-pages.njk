@@ -1,27 +1,16 @@
----js
-// <script>
-const pagination = {
-	data: "collections",
-	size: 1,
-	alias: "tag",
-	filter: ["all", "posts"],
-	// addAllPagesToCollections: true,
-};
-
-const eleventyExcludeFromCollections = true;
-
-const eleventyComputed = {
-	title: "Tagged '{{ tag }}'",
-	permalink: function(data) {
-		// If DuplicatePermalinkOutputError occurs, check that no tag occurs
-		// with differing case, e.g. "RSS" and "rss".
-		return `/tags/${this.slugify(data.tag)}/`;
-	}
-};
+---
+pagination:
+  data: collections.tags      # ← sửa thành collections.tags
+  size: 1
+  alias: tag
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  title: "Tagged '{{ tag }}'"
+  permalink: /tags/{{ tag | slugify }}/index.html
 ---
 <h1>Tagged “{{ tag }}”</h1>
 
-{% set postslist = collections[ tag ] %}
+{% set postslist = collections.all | postsByTag(tag) | reverse %}
 {% include "postslist.njk" %}
 
-<p>See <a href="tags.njk">all tags</a>.</p>
+<p>See <a href="/tags/">all tags</a>.</p>

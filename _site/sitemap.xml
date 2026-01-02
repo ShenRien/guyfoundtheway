@@ -87,13 +87,6 @@
 	
 		
 		<url>
-			<loc>https://example.com/blog/M%E1%BB%99t%20s%E1%BB%91%20plugin%20drumkits%20v%C3%A0%20lv2%20(ask%20Grok)/</loc>
-			<lastmod>2025-12-27</lastmod>
-		</url>
-	
-	
-		
-		<url>
 			<loc>https://example.com/blog/untitled/Untitled/</loc>
 			<lastmod>2025-12-27</lastmod>
 		</url>
@@ -122,13 +115,6 @@
 	
 		
 		<url>
-			<loc>https://example.com/tags/</loc>
-			<lastmod>2025-12-27</lastmod>
-		</url>
-	
-	
-		
-		<url>
 			<loc>https://example.com/blog/Toithuhaithamlam/</loc>
 			<lastmod>2025-12-28</lastmod>
 		</url>
@@ -136,8 +122,22 @@
 	
 		
 		<url>
+			<loc>https://example.com/tags/</loc>
+			<lastmod>2026-01-02</lastmod>
+		</url>
+	
+	
+		
+		<url>
 			<loc>https://example.com/feed/feed.xml</loc>
-			<lastmod>2025-12-30</lastmod>
+			<lastmod>2026-01-02</lastmod>
+		</url>
+	
+	
+		
+		<url>
+			<loc>https://example.com/blog/quen/</loc>
+			<lastmod>2026-01-02</lastmod>
 		</url>
 	
 </urlset>

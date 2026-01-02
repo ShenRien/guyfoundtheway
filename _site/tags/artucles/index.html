@@ -1,11 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Tagged &#39;another tag&#39;</title>
-		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
+		<title>Tagged &#39;artucles&#39;</title>
+		<meta name="description" content="Một người vẫn đi tới phía trước">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Guy found the way">
+
+		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="/favicon/starfish-apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="/favicon/starfish-apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon/starfish-apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon/starfish-apple-touch-icon.png">
 		<!-- Preconnect để load nhanh hơn -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -41,6 +48,7 @@
   --text-color-link: #360800;
   --text-color-link-active: #6f1a0b;
   --text-color-link-visited: #33140e;
+  --shadow-color: rgba(139, 139, 139, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,12 +56,12 @@
 		--color-gray-20: #e0e0e0;
 		--color-gray-50: #C0C0C0;
 		--color-gray-90: #dad8d8;
-
+		--content-color: hsl(208, 20%, 17%);
 		/* --text-color is assigned to --color-gray-_ above */
 		--text-color-link: #e33012;
 		--text-color-link-active: #591408;
 		--text-color-link-visited: #bb2208;
-
+		--shadow-color: rgba(22, 22, 22, 0.741);
 		--background-color: #15202b;
 	}
 }
@@ -378,10 +386,10 @@ body {
 }
 
 .Menuheader {
-	flex: 1;
 	overflow-y: auto;
 	overflow-x: hidden;
-
+	position: sticky;
+	top: 10px;
 	scrollbar-width: none;
 	display: -webkit-box;
 	-webkit-line-clamp: 2; /* number of lines to show */
@@ -407,23 +415,32 @@ body {
 	top: 0;
 }
 
+.content-container {
+	height: auto;
+	display: grid;
+	grid-template-rows: minmax(0, 20%) 1fr;
+}
+
+.content-home {
+
+	position: relative;
+	display: flex;
+}
 
 .content-body {
+	position: relative;
+	flex: 1fr;
 	background-color: var(--content-color);
-	height: 100vh;
-	margin-top: 100px;
+	height: 90vh;
 	padding: 0px 50px 0 50px;;
 	overflow-y: auto;
 	border-radius: 1em 1em 0 0;
-	box-shadow: 1px 5px 20px rgba(139, 139, 139, 0.15);
-	position: relative;
+	box-shadow: 1px 5px 20px var(--shadow-color);
 	scrollbar-width: none;
 	margin-right: 5vh;
 }
 
-.content-container {
-	height: 100vh;
-}
+
 
 
 .nav {
@@ -650,41 +667,6 @@ pre {
 
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
-			<a href="/blog/firstpost/" class="postlistnav-link">This is my first post.</a>
-			<a class="postlistnav-date"><time datetime="2018-05-01">May 2018</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
-			<a href="/blog/secondpost/" class="postlistnav-link">This is my second post with a much longer title.</a>
-			<a class="postlistnav-date"><time datetime="2018-07-04">July 2018</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
-			<a href="/blog/thirdpost/" class="postlistnav-link">This is my third post.</a>
-			<a class="postlistnav-date"><time datetime="2018-08-24">August 2018</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
-			<a href="/blog/fourthpost/" class="postlistnav-link">This is my fourth post</a>
-			<a class="postlistnav-date"><time datetime="2018-09-30">September 2018</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
-			<a href="/blog/fifthpost/" class="postlistnav-link">This is a fifth post (draft)</a>
-			<a class="postlistnav-date"><time datetime="2023-01-23">January 2023</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
 			<a href="/blog/The River/" class="postlistnav-link">The river</a>
 			<a class="postlistnav-date"><time datetime="2025-10-26">October 2025</time></a>
 			</p>
@@ -769,15 +751,22 @@ pre {
 
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
-			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
-			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
+			<a class="postlistnav-date"><time datetime="2025-12-27">December 2025</time></a>
 			</p>
 		</li>
 
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
-			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
-			<a class="postlistnav-date"><time datetime="2025-12-23">December 2025</time></a>
+			<a href="/blog/Toithuhaithamlam/" class="postlistnav-link">Tội thứ 2 - Tham lam</a>
+			<a class="postlistnav-date"><time datetime="2025-12-28">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/quen/" class="postlistnav-link">Quên</a>
+			<a class="postlistnav-date"><time datetime="2026-01-02">January 2026</time></a>
 			</p>
 		</li>
 
@@ -813,7 +802,7 @@ pre {
 
 					<div>
 					<p>
-						<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+						<em><a>Built with @Shen2H x <a href="https://www.11ty.dev/">Eleventy v3.1.2 </a>| Aloha</a></em>
 					</p>
 					</div>
 
@@ -821,14 +810,14 @@ pre {
 			</div>
 
 		<div class="content-container">
+		<div class="content-home">
 			<a href="/" class="home-link">Guy found the way</a>
 			<!-- Phai co background hop le scr cho nay,
 			lam theo huong dan
 			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
-
+		</div>
 		<div class="content-body">
-		<div class="sticky-title">Tagged &#39;another tag&#39;</div>
-
+		<div class="sticky-title">Tagged &#39;artucles&#39;</div>
 
 
 		<main id="main">
@@ -836,16 +825,16 @@ pre {
 			<heading-anchors>
 
 				
-<h1 id="tagged-another-tag">Tagged “another tag”</h1>
+<h1 id="tagged-artucles">Tagged “artucles”</h1>
 
 
 <ol reversed="" class="postlist" style="--postlist-index: 2">
 
 		<li class="postlist-item">
 
-			<a href="/blog/firstpost/" class="postlist-link">This is my first post.</a>
+			<a href="/blog/quen/" class="postlist-link">Quên</a>
 
-			<time class="postlist-date" datetime="2018-05-01">May 2018</time>
+			<time class="postlist-date" datetime="2026-01-02">January 2026</time>
 
 		</li>
 
@@ -864,7 +853,7 @@ pre {
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
 </div>
-		<!-- This page `/tags/another-tag/` was built on 2025-12-27T12:19:31.590Z -->
+		<!-- This page `/tags/artucles/` was built on 2026-01-02T11:08:57.549Z -->
 		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
 	</body>
 </html>

@@ -58,6 +58,63 @@ export default async function(eleventyConfig) {
 
 	// Official plugins
 
+
+  // Tạo global data "tags" – danh sách tag unique lowercase
+// Thay bằng addCollection (collectionApi có sẵn!)
+eleventyConfig.addCollection("tags", function(collectionApi) {
+  const tags = new Set();
+
+  collectionApi.getAll().forEach(item => {
+    if (item.data.tags && Array.isArray(item.data.tags)) {
+      item.data.tags.forEach(tag => {
+        if (tag && typeof tag === "string") {
+          tags.add(tag.trim().toLowerCase());
+        }
+      });
+    }
+  });
+
+  return [...tags].sort();
+});
+
+// Giữ filter postsByTag (case-insensitive)
+eleventyConfig.addFilter("postsByTag", function(posts, tag) {
+  return posts.filter(post => {
+    if (!post.data.tags) return false;
+    return post.data.tags.some(t =>
+      typeof t === "string" && t.trim().toLowerCase() === tag.toLowerCase()
+    );
+  });
+});
+	// Normalize tags: lowercase và unique
+	eleventyConfig.addFilter("normalizeTags", function(tags) {
+		if (!tags) return [];
+		return [...new Set(tags.map(tag => tag.toLowerCase().trim()))];
+	});
+
+	// Tạo collection tagList unique (lowercase)
+	eleventyConfig.addCollection("tagList", function(collectionApi) {
+		const tags = new Set();
+		collectionApi.getAll().forEach(item => {
+			if ("tags" in item.data) {
+				let itemTags = item.data.tags;
+				if (typeof itemTags === "string") itemTags = [itemTags];
+				itemTags.forEach(tag => tags.add(tag.toLowerCase().trim()));
+			}
+		});
+		return [...tags].sort();
+	});
+
+	// Optional: tự động normalize tags khi render post
+	eleventyConfig.addFilter("getPostsByTag", function(collection, tag) {
+		return collection.filter(post => {
+			if (!post.data.tags) return false;
+			let postTags = post.data.tags;
+			if (typeof postTags === "string") postTags = [postTags];
+			return postTags.some(t => t.toLowerCase().trim() === tag.toLowerCase().trim());
+		});
+	});
+
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
 		preAttributes: { tabindex: 0 }
 	});

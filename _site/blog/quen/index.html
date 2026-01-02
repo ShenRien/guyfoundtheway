@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Tagged &#39;Zrythm&#39;</title>
-		<meta name="description" content="Một người vẫn đi tới phía trước">
+		<title>Quên</title>
+		<meta name="description" content="Mỗi bước chân đi là một tôn giáo">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Guy found the way">
 
 		<link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
@@ -625,6 +625,174 @@ pre {
   white-space: -o-pre-wrap !important;
   word-wrap: break-word !important;
   
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
 }</style>
 		
 	</head>
@@ -751,13 +919,6 @@ pre {
 
 		<li class="postlistnav-item">
 			<p class="postlistnav-paragraph">
-			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlistnav-link">Một số plugin drumkits và lv2 (ask Grok)</a>
-			<a class="postlistnav-date"><time datetime="2025-12-27">December 2025</time></a>
-			</p>
-		</li>
-
-		<li class="postlistnav-item">
-			<p class="postlistnav-paragraph">
 			<a href="/blog/untitled/Untitled/" class="postlistnav-link">Untitled</a>
 			<a class="postlistnav-date"><time datetime="2025-12-27">December 2025</time></a>
 			</p>
@@ -767,6 +928,13 @@ pre {
 			<p class="postlistnav-paragraph">
 			<a href="/blog/Toithuhaithamlam/" class="postlistnav-link">Tội thứ 2 - Tham lam</a>
 			<a class="postlistnav-date"><time datetime="2025-12-28">December 2025</time></a>
+			</p>
+		</li>
+
+		<li class="postlistnav-item">
+			<p class="postlistnav-paragraph">
+			<a href="/blog/quen/" class="postlistnav-link">Quên</a>
+			<a class="postlistnav-date"><time datetime="2026-01-02">January 2026</time></a>
 			</p>
 		</li>
 
@@ -817,7 +985,7 @@ pre {
 			https://stackoverflow.com/questions/5743083/strange-border-on-img-tag -->
 		</div>
 		<div class="content-body">
-		<div class="sticky-title">Tagged &#39;Zrythm&#39;</div>
+		<div class="sticky-title">Quên</div>
 
 
 		<main id="main">
@@ -825,26 +993,40 @@ pre {
 			<heading-anchors>
 
 				
-<h1 id="tagged-zrythm">Tagged “Zrythm”</h1>
 
 
-<ol reversed="" class="postlist" style="--postlist-index: 2">
+<h1 id="quen">Quên</h1>
 
-		<li class="postlist-item">
+<ul class="post-metadata">
+	<li><time datetime="2026-01-02">02 January 2026</time></li>
+	<li><a href="/tags/tusixmode/" class="post-tag">Tusixmode</a>, </li>
+	<li><a href="/tags/artucles/" class="post-tag">Artucles</a></li>
+</ul>
 
-			<a href="/blog/Một số plugin drumkits và lv2 (ask Grok)/" class="postlist-link">Một số plugin drumkits và lv2 (ask Grok)</a>
+<p>Mình thấy rằng mình chả quên gì cả. Hay là do mình đã nhớ quá nhiều?! Mình tìm đủ mọi cách để nhớ về mọi thứ. Mà như người ta nói, nếu nhớ quá nhiều thì chẳng còn chỗ nào để mà quên nữa cả.</p>
+<p>Dẫu là cuộc sống không cần sự tuyến tính, không cần sự sắp đặt để cho mọi thứ trôi đi theo như cách nó vẫn cứ như vậy mà diễn ra thôi. Đừng cố chọn cho mình một điều gì không vô nghĩa.</p>
+<p>Một cuốn phim, một câu chuyện, một con đường đi, một sự đốt cháy tất cả mọi hiểu biết và cố gắng của mình để chia sẻ ra ngoài sự cạn kiệt của tâm hồn. Ở đây không còn gì cả, chỉ toàn là sỏi đá mà thôi.</p>
+<p>Ai đó nói rằng bạn đừng cố công làm những điều vượt quá sức của mình. Nếu bạn giỏi đến vậy, sao không dùng 1%. Là dùng một kiểu cách năng lượng nào đó mà bạn không bao giờ cần cố gắng để có thể làm được nó một cách hoàn thiện.</p>
+<p>Hoặc cũng có người nói rằng, bạn phải cố gắng hết sức mình trong khoảng thời gian đầu tiên. Để rồi khi bạn đạt được trạng thái thành thạo một điều gì đó rồi, bạn chỉ cần làm nó với năng lượng không vượt quá mức độ mà bạn chỉ cần ngồi nghỉ ngơi thôi. Lúc đó bạn không cần thử thách chính mình nữa.</p>
+<p>Vậy là, có người hỏi, bạn đã bao giờ “giỏi” một điều gì đó chưa?</p>
+<p>Giỏi một điều gì đó nghĩa là làm một điều gì đó thật lâu, đến mức làm mà không còn cần phải suy nghĩ nữa. Hay làm đến mức không ai có thể đuổi theo bạn nữa. Hay chỉ đơn giản là ở một tầng mức mà ở đó bạn không bao giờ còn sợ mình phải đi xuống, hay cần thiết buộc phải đi lên nữa. Giống như hỏi là, bạn đã an toàn chưa?!</p>
+<p>Có một ngôi nhà nằm giữa một cái hồ khá rộng. Sàn nhà bằng gỗ trải dài ra cách khuôn viên nhà khoảng ba mét. Đặt ở đó 2 cái ghế tựa, và neo một chiếc thuyền dùng để đi lại mỗi lúc cần phải đi đến một cửa hàng nào gần đó để mua sắm. Hay đi vào rừng để săn bắt, tìm trái cây.</p>
+<p>Cánh cửa làm bằng khung gỗ, nhưng là loại cửa kéo, và bản cửa là kính trong suốt, từ ngoài nhìn vào có thể thấy 40% hình ảnh phản chiếu của ánh sáng bên ngoài và 60% còn lại là khung cảnh phòng khách và đồ dùng bên trong.</p>
+<p>Sau phần nhìn thấy được là phòng ngủ, phòng ngủ đủ để che chắn một không gian rộng rãi và thoải mái cho việc đi đứng nằm ngồi. Nhưng không quá kín như bưng để người ở bên trong đó nhìn thấy ánh ban mai buổi sáng. Nghe tiếng gió và cảm nhận không khí vào mùa thu. Cũng như ôm ấp linh hồn mình trong cái lạnh giá của mùa đông. Đủ để ngủ, và đủ để thức.</p>
+<p>Chắc chắn là không thể thiếu nơi mà ai cũng muốn nó thiếu. Một nhà vệ sinh tự huỷ. Dùng vôi để ủ mùi hôi của chất thải và hầm phân huỷ gần bờ dùng để xử lý chất thải định kỳ. Được thiết kế sao cho luôn được trở thành đất sau một thời gian. Và được đào mới mỗi 50 năm.</p>
+<p>Người ta từng nghĩ đến việc đưa một đường ống đủ dài để dẫn chất thải từ giữa hồ vào hầm, nhưng nó rườm rà vì ống sẽ phải nằm lơ lửng giữa hồ, hoặc quá tốn chi phí nhân công cũng như vật tư không cần thiết cho việc dẫn ống men theo đáy hồ vào bờ nếu việc đó khả thi. Việc bảo trì đường ống cũng sẽ mất một khoản kha khá chi phí không cần thiết và không hiệu quả.</p>
+<p>Nhìn chung xử lý khô luôn tốt hơn, dù sao thì mục đích của việc sử dụng như vậy cũng là để đảm bảo tối ưu nhất việc không xả chất thải vào hồ. Giữ hồ ở mức trong sạch nhất có thể như một hành động tôn trọng thiên nhiên vì những tạo vật đã được người cho mượn. Cũng là - hiển nhiên rằng - để con cháu đời sau không phải sống trong một thời đại hậu tận thế với những vết sẹo không thể chữa lành nổi mà người đời trước đã để lại cho mẹ thiên nhiên.</p>
+<p>Nước được lấy từ giếng khoan và ống bơm nước tay nối với mạch nước gần bờ hồ. Được đưa vào bồn trữ nước đặt trên mái nhà. Nơi mà được thiết kế để có thể hứng trọn cả nước mưa nhiều nhất có thể mỗi khi có mưa. Và đi qua một bộ màng lọc nước hiện đại bằng các loại than, đá tự nhiên để dùng cho sinh hoạt. Và một bộ máy lọc nước chạy bằng xăng - công nghệ hiện đại hứa hẹn một mô hình động cơ chạy bằng hơi nước, nhưng đó là phạm trù của tương lai.</p>
+<p>Một gian bếp lửa có cửa sổ. Bếp dùng ống khói và cửa sổ lớn để thông khí ra ngoài. Được thiết kế sao cho khói và không khí tràn vào theo hướng này ở vị trí này và luôn ra heo hướng đã được tính toán ở vị trí kia. Được biết, hướng gió cố định thường xuất phát từ Tây sang Đông, hoặc từ Nam lên Bắc. Vào các mùa mỗi năm, gió sẽ thay đổi hướng một lần nhưng không bao giờ thổi theo hướng ngược lại.</p>
+<p>Họ dùng năng lượng mặt trời và pin dự phòng để thắp sáng ngôi nhà. Vào khoảng cuối Thu và Đông, khi mặt trời bắt đầu ít xuất hiện hoặc nhiều tuần chỉ toàn sương mù và mây. Bếp củi, đá đánh lửa và đèn dầu được dùng để những người trong ngôi nhà sinh hoạt, ngồi quây quần bên nhau. Có chứ, nhà đó có một cây đàn.</p>
+<p>Lưu ý là vào những ngày mùa trời nắng nhiều như mùa Xuân và giữa Hạ, lượng pin dự trữ từ mặt trời không được tích trữ nhiều hơn những ngày nắng trung bình. Một cách để đảm bảo tuổi thọ của các thiết bị và thói quen sinh hoạt không bị quá chênh lệch giữa các mùa trong năm. Và giữ mọi thứ luôn cân bằng.</p>
+<p>Trong nhà có hình tượng thánh giá treo trên tường cạnh bên ảnh Đức Maria, một pho tượng Phật Thích Ca đặt để trên tủ thờ và một pho tượng thần Ganesha ngay góc phòng khách. Không có nỗi sợ mà chỉ có một niềm tin trường tồn vào sự tồn tại vĩnh hằng và sự vô tận trôi nổi trong dòng sông tuyệt đối của thời gian. Thứ chứa đựng cả mọi niềm vui, nỗi buồn, hạnh phúc và khổ đau, của thành tựu, của ân hận, của mọi đau thương mất mát, tuyệt vọng hay sướng vui, của mọi cung bậc mà nhân loại có thể tập hợp lại trong tận cùng sâu thẳm của thế giới đã từng được ghi khắc và hiển hiện thành sự tồn tại đang có và cứ sẽ như thế này mãi mãi ở ngay khoảnh khắc hiện tại của sự tồn tại này.</p>
+<p>Mỗi bước chân đang đi trên thế gian là một tôn giáo. Dù rằng thứ tôn giáo đó nghĩ rằng mình có đang đi theo một tôn giáo nào khác hay không.</p>
+<p>---</p>
+<p>&gt; Shen2H x Scorprien: fromashes</p>
 
-			<time class="postlist-date" datetime="2025-12-27">December 2025</time>
-
-		</li>
-
-</ol>
-
-
-<p>See <a href="/tags/">all tags</a>.</p>
-
-
-
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/Toithuhaithamlam/">Tội thứ 2 - Tham lam</a></li>
+</ul>
 
 			</heading-anchors>
 		</main>
@@ -853,7 +1035,7 @@ pre {
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="signature-background">
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="footer_after">
 </div>
-		<!-- This page `/tags/zrythm/` was built on 2025-12-30T07:01:21.076Z -->
+		<!-- This page `/blog/quen/` was built on 2026-01-02T11:08:57.454Z -->
 		<script type="module" src="/dist/cC8wS6ZjFU.js"></script>
 	</body>
 </html>
