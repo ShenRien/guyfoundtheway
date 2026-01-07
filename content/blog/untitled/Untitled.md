@@ -3,7 +3,7 @@ title: Untitled
 description: Một bài viết chưa đặt tên
 tags:
   - write
-dateCreated: 2025-12-23
+date: 2025-12-23T12:30:
 ---
 Mình đang tự làm khó mình bằng việc cài cả đống font mà tự biết chỉ cần một font nào đó không bị lỗi là được. Có phải đang cố nghĩ quá nhiều về việc như thế nào là chuẩn mực (của một người đàn ông) trong việc thực hiện điều gì đó một cách nghiêm túc hay không? Nghiêm túc, liệu có vượt qua việc chống lại sự ham muốn (dục) không đây. 
 Nhưng ít nhất chữ phải dễ để còn nhìn lại mà đọc và xem đó là một đoạn văn, chứ không phải một dòng code.
