@@ -4,7 +4,7 @@ title: Tịnh
 description: "Nếu chỉ cứ nói thẳng ra sự thật, sự thật sẽ bị bóp méo bởi những thứ không "
 date: 2026-01-07T19:11:00
 tags:
-  - tusix
+  - tusixmode
   - personal
 ---
 Thế giới chỉ cố gắng đẩy mình đi ra khỏi mức độ vô nghĩa mà chính bản thân không tự cố gắng bám lấy được.
